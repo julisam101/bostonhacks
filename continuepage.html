@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title> Continue Page </title>
+    <link rel="stylesheet" href="CSS/continuepage.css">
+</head>
+
+<body> 
+
+<h1>Your MBTA Route</h1>
+
+<div id="routeBox" class="route-card">
+    Loading route...
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const city = params.get("city");
+    const dest = params.get("dest");
+
+    const routes = {
+        "North End": {
+            "North Station": "Walk to Haymarket → Green/Orange Line to North Station.",
+            "South Station": "Walk to Haymarket → Orange Line → Red Line to South Station.",
+            "Logan Airport": "Walk to Haymarket → Blue Line → Airport Shuttle."
+        },
+        "South End": {
+            "North Station": "Orange Line from Back Bay → North Station.",
+            "South Station": "Walk or Silver Line SL4.",
+            "Logan Airport": "Silver Line SL4 → SL1 to Airport."
+        },
+        "Back Bay": {
+            "North Station": "Orange Line direct.",
+            "South Station": "Orange Line → Red Line.",
+            "Logan Airport": "Back Bay Silver Line → SL1."
+        }
+    };
+
+    const routeText = routes[city]?.[dest] || "No route found for this combination.";
+
+    document.getElementById("routeBox").innerHTML = `
+        <h2>${city} → ${dest}</h2>
+        <p>${routeText}</p>
+    `;
+</script>
+
+</body>
+</html>

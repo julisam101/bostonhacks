@@ -1,2 +1,2 @@
-# miniproject1
+# bostonhacks
 Website for Someone Else

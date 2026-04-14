@@ -1,24 +1,48 @@
 body {
     background-color: #007A33;
     font-family: 'League Spartan', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
     gap: 24px;
     box-sizing: border-box;
-    padding: 24px;
+    padding: 40px 24px;
 }
 
-.start-box {
-    display: block;
+h1 {
+    font-size: 48px;
+    margin: 20px 0;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 32px;
+    margin: 10px 0;
+    font-weight: 700;
+}
+
+p {
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     width: 90%;
-    max-width: 420px;
-    margin: 8px auto;
+    max-width: 450px;
+    margin: 20px auto;
+}
+
+.start-box, .nav-box {
+    display: block;
+    width: 100%;
     padding: 18px 36px;
     background: white;
     color: #007A33;
@@ -27,6 +51,33 @@ body {
     text-decoration: none;
     cursor: pointer;
     text-align: center;
+    font-size: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.start-box:hover, .nav-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.info-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    margin-top: 30px;
+}
+
+.info-section h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: 800;
+}
+
+.info-section p {
+    margin: 12px 0;
+    font-size: 16px;
+}
+
 
 

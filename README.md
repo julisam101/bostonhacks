@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚇 Boston MBTA Transportation Guide
 
 A comprehensive, Celtics-themed website to help navigate Boston's public transportation system and explore tourist attractions.
@@ -134,3 +135,7 @@ For questions about routes or attractions, refer to the MBTA website or local vi
 **Design Theme**: Celtics 🏀 (Green & Gold)
 **Created for**: BostonHacks Project
 **Last Updated**: April 2026
+=======
+# bostonhacks
+Website for Someone Else
+>>>>>>> 591a791f5ef926a320fc2631d2b354dca5363c37

@@ -1,34 +1,17 @@
-## Client Brief
+## Proposal 
 
-**Client:** Daniel Rodriguez, a current Babson Student
+- What am I Building: 
+    - A Boston transit guide that maps MBTA T routes, suggests the best lines to take, and points out nearby attractions. 
 
-**Purpose:** A Boston public-transport website that tracks the MBTA T, maps routes like Google Maps, guides users on which lines to take, and highlights nearby tourist spots. 
+- Who is it for/Why: 
+    - Anyone navigating the Boston area, whether you're lost, new to the city, or simply looking to explore. One doesn't have to jump between appe or piece together information from different platforms. Everything you need to find your way and discover what's around you is in one place.
 
-**Audience:** Anyone who is lost within the Boston area or is looking to explore the city. The audience would need the different routes that Boston offers and a list of touristy areas depening on where they are.
+- Core Features: 
+    - Simple directions/navgiation to a selected destination
+    - Curated explore suggestions based on where you are 
+    - Nearby points of interest displayed around you
 
-**Key action:** 
-- If the audience is stuck in an unfamiliar place, they should be able to use the website as a way to help guide them into the city and understand the different train tracks. 
-
-**Pages/sections needed:**
-- List of all the Boston T lines and neatly depict where each takes them 
-- List of touristy places in which they can visit
-- A list of possible routes 
-
-
-**Content status:** 
-- In regards to the T lines, that's all public information which I can get off the webiste. 
-- When it comes to touristy areas, it's more so of doing a general research.
-
-**Style preferences:** 
-- My client said they would like a Celtics themed website to represent Boston.
-
-**Inspiration sites:**
-- MBTA Website: 
-    - Like: provides the cost of the transportation 
-    - Dislike: information is very crowded
-- On The World Map: 
-    - Like: best looking website, ideal one to go based off
-    - Dislike: information is very crowded
-- Harvard MBTA: 
-    - Like: more interactive, best mapping
-    - Dislike: boring to look at, needs more flare 
+- What I don't know yet: 
+    - How to display multiple routes efficiently without repetitive code
+    - How to dynamically surface nerby attractions based on the user's selected destination
+    - How to validate form inputs so all required fields are completed before allowing the user to proceed 

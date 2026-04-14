@@ -2,15 +2,185 @@ body {
     background-color: #007A33;
     font-family: 'League Spartan', sans-serif;
     font-size: 16px;
-    text-align: center;
     color: white;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     min-height: 100vh;
-    gap: 28px;
+    padding: 20px;
+    margin: 0;
     box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.route-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.loading {
+    text-align: center;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.route-card h1 {
+    font-size: 36px;
+    margin-top: 0;
+    margin-bottom: 28px;
+    text-align: center;
+    font-weight: 900;
+}
+
+.route-details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 28px;
     padding: 24px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    gap: 16px;
+}
+
+.location {
+    flex: 1;
+    text-align: center;
+}
+
+.location .label {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.location .name {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 8px 0 0 0;
+    color: #FFD700;
+}
+
+.arrow-large {
+    font-size: 28px;
+    opacity: 0.7;
+}
+
+.route-instructions {
+    margin-bottom: 24px;
+}
+
+.route-instructions h2 {
+    font-size: 22px;
+    margin: 0 0 16px 0;
+    font-weight: 800;
+}
+
+.instruction {
+    background: rgba(255, 215, 0, 0.1);
+    border-left: 4px solid #FFD700;
+    padding: 16px 20px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    border-radius: 6px;
+}
+
+.tips {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 0;
+}
+
+.tips p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.tips strong {
+    color: #FFD700;
+    font-weight: 700;
+}
+
+.route-card .link {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 700;
+    transition: opacity 0.2s;
+}
+
+.route-card .link:hover {
+    opacity: 0.8;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 16px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+    font-size: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-new-route {
+    background: white;
+    color: #007A33;
+}
+
+.btn-attractions,
+.btn-home {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+    .route-card {
+        padding: 20px;
+    }
+    
+    .route-card h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .route-details {
+        flex-wrap: wrap;
+        padding: 16px;
+    }
+    
+    .location .name {
+        font-size: 18px;
+    }
+    
+    .instruction {
+        font-size: 15px;
+    }
 }
 

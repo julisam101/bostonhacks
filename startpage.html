@@ -3,41 +3,70 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title> Start Page </title>
+    <title>Find Your Route | Boston Transportation</title>
     <link rel="stylesheet" href="CSS/startpage.css">
 </head>
 <body>
-    <h1> Please Select Which City You Are In: </h1>
+    <div class="page-container">
+        <h1>🚇 Plan Your Boston Route</h1>
+        <p class="subtitle">Select your current location and destination</p>
 
-    <div class="dropdown">
-        <button class="dropdown-btn">Choose city ▾</button>
-        <div class="dropdown-content" id="cityDropdown">
-            <a href="#">North End</a>
-            <a href="#">South End</a>
-            <a href="#">Charlestown</a>
-            <a href="#">Allston</a>
-            <a href="#">Brighton</a>
-            <a href="#">Fenway</a>
-            <a href="#">Back Bay</a>
-            <a href="#">Seaport</a>
-            <a href="#">Beacon Hill</a>
-            <a href="#">Chinatown</a>
+        <div class="form-section">
+            <div class="input-group">
+                <label for="cityDropdown">Where Are You Now?</label>
+                <div class="dropdown">
+                    <button class="dropdown-btn">Choose location ▾</button>
+                    <div class="dropdown-content" id="cityDropdown">
+                        <a href="#">Downtown</a>
+                        <a href="#">Beacon Hill</a>
+                        <a href="#">North End</a>
+                        <a href="#">Back Bay</a>
+                        <a href="#">Fenway</a>
+                        <a href="#">South End</a>
+                        <a href="#">Seaport</a>
+                        <a href="#">Cambridge</a>
+                        <a href="#">Charlestown</a>
+                        <a href="#">Allston</a>
+                        <a href="#">Brighton</a>
+                        <a href="#">Chinatown</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="input-group">
+                <label for="destDropdown">Where Are You Going?</label>
+                <div class="dropdown">
+                    <button class="dropdown-btn">Choose destination ▾</button>
+                    <div class="dropdown-content" id="destDropdown">
+                        <a href="#">North Station</a>
+                        <a href="#">South Station</a>
+                        <a href="#">Logan Airport</a>
+                        <a href="#">Harvard Square</a>
+                        <a href="#">MIT Campus</a>
+                        <a href="#">Boston Common</a>
+                        <a href="#">Public Garden</a>
+                        <a href="#">Fenway Park</a>
+                        <a href="#">Museum of Fine Arts</a>
+                        <a href="#">Boston Children's Museum</a>
+                        <a href="#">New England Aquarium</a>
+                        <a href="#">Newbury Street</a>
+                        <a href="#">Boston Public Library</a>
+                        <a href="#">TD Garden</a>
+                        <a href="#">Freedom Trail</a>
+                        <a href="#">Charles River Esplanade</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <h1> Where Do You Wish To Go? </h1>
+        <button class="continue-box" id="continueBtn">Find My Route!</button>
 
-    <div class="dropdown">
-        <button class="dropdown-btn">Choose destination ▾</button>
-        <div class="dropdown-content" id="destDropdown">
-            <a href="#">North Station</a>
-            <a href="#">South Station</a>
-            <a href="#">Logan Airport</a>
-            <a href="#">Museum of Fine Arts</a>
-            <a href="#">Harvard Square</a>
-            <a href="#">Fenway Park</a>
-            <a href="#">Boston Common</a>
-            <a href="#">Newbury Street</a>
+        <div class="links-section">
+            <a href="tlines.html" class="info-link">View All T Lines</a>
+            <a href="attractions.html" class="info-link">Browse Attractions</a>
+            <a href="mainpage.html" class="info-link">Back Home</a>
         </div>
     </div>
 
@@ -82,19 +111,14 @@
                 c.classList.remove('show');
             });
         });
-    </script>
 
-    <h1> Let's Go! </h1>
-    <button class="continue-box" id="continueBtn">Continue!</button>
-
-    <script>
         // Continue button logic
         document.getElementById("continueBtn").addEventListener("click", function() {
             if (selectedCity && selectedDestination) {
                 const url = `continuepage.html?city=${encodeURIComponent(selectedCity)}&dest=${encodeURIComponent(selectedDestination)}`;
                 window.location.href = url;
             } else {
-                alert("Please select both a city and a destination.");
+                alert("Please select both a current location and a destination.");
             }
         });
     </script>

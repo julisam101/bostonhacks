@@ -2,49 +2,227 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title> Continue Page </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Route | Boston Transportation</title>
     <link rel="stylesheet" href="CSS/continuepage.css">
 </head>
 
-<body> 
+<body>
+    <div class="container">
+        <div id="routeBox" class="route-card">
+            <p class="loading">Loading your route...</p>
+        </div>
 
-<h1>Your MBTA Route</h1>
+        <div class="action-buttons">
+            <a href="startpage.html" class="btn btn-new-route">Plan Another Route</a>
+            <a href="attractions.html" class="btn btn-attractions">View Attractions</a>
+            <a href="mainpage.html" class="btn btn-home">Back Home</a>
+        </div>
+    </div>
 
-<div id="routeBox" class="route-card">
-    Loading route...
-</div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const city = params.get("city");
+        const dest = params.get("dest");
 
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const city = params.get("city");
-    const dest = params.get("dest");
+        // Comprehensive routing database
+        const routes = {
+            "Downtown": {
+                "North Station": "🚇 You're already close! Walk to North Station (5-10 min) or take Orange Line from Downtown Crossing",
+                "South Station": "Walk to Downtown Crossing → Red Line South to South Station (5-8 min)",
+                "Logan Airport": "Walk to Downtown Crossing → Blue Line to Airport (15-20 min)",
+                "Harvard Square": "Red Line from Downtown Crossing → Continue to Harvard Square (20-25 min)",
+                "MIT Campus": "Red Line from Downtown Crossing → Get off at Kendall/MIT (15-20 min)",
+                "Boston Common": "Walk north from Downtown Crossing (10-15 min)",
+                "Public Garden": "Walk north from Downtown Crossing near Park Street (10-15 min)",
+                "Fenway Park": "Orange Line to Back Bay → Green Line to Kenmore (20-25 min)",
+                "Museum of Fine Arts": "Orange Line to Back Bay → Walk or bus (20 min)",
+                "Boston Children's Museum": "Walk to Seaport area (15 min) or take Silver Line",
+                "New England Aquarium": "Walk to waterfront at Blue Line Aquarium Station (10-15 min)",
+                "Newbury Street": "Orange Line to Back Bay (10 min)",
+                "Boston Public Library": "Orange Line to Back Bay → Walk to Copley (12 min)",
+                "TD Garden": "Orange Line North to North Station (10 min)",
+                "Freedom Trail": "Walk and explore - Trail starts at Boston Common (nearby)"
+            },
+            "Beacon Hill": {
+                "North Station": "Red Line from Charles/MGH to North Station (5 min)",
+                "South Station": "Red Line to Downtown Crossing → Continue South (8 min)",
+                "Logan Airport": "Red Line from Charles/MGH → Blue Line at Government Center → Airport Line (25 min)",
+                "Harvard Square": "Red Line from Charles/MGH → Continue to Harvard (15 min)",
+                "MIT Campus": "Red Line from Charles/MGH to Kendall/MIT (12 min)",
+                "Boston Common": "Walk down hill to Boston Common (5-10 min)",
+                "Public Garden": "Walk to Public Garden (5 min)",
+                "Fenway Park": "Red Line to Downtown Crossing → Orange Line to Back Bay → Green Line to Kenmore (25 min)",
+                "Museum of Fine Arts": "Red Line to Downtown Crossing → Orange Line to Back Bay (25 min)",
+                "Boston Children's Museum": "Red Line to South Station → Walk or Silver Line (20 min)",
+                "New England Aquarium": "Red Line from Charles/MGH to Downtown Crossing → Walk to waterfront (10 min)",
+                "Newbury Street": "Walk to Charles Street area (10 min) or Red Line to Back Bay",
+                "Boston Public Library": "Red Line from Charles/MGH to Back Bay → Walk to Copley (20 min)",
+                "TD Garden": "Red Line from Charles/MGH to North Station (8 min)",
+                "Freedom Trail": "Walk to Boston Common - Trail guide available"
+            },
+            "North End": {
+                "North Station": "Green Line from Haymarket to North Station (2 min) or walk (10 min)",
+                "South Station": "Orange Line from Haymarket to South Station (8 min)",
+                "Logan Airport": "Blue Line from Aquarium to Airport (15 min)",
+                "Harvard Square": "Green Line to Downtown Crossing → Red Line to Harvard (20 min)",
+                "MIT Campus": "Orange Line from Haymarket to Downtown Crossing → Red Line to Kendall (15 min)",
+                "Boston Common": "Walk to Boston Common via downtown (15 min)",
+                "Public Garden": "Walk north to Public Garden (15 min)",
+                "Fenway Park": "Orange Line from Haymarket to Back Bay → Green Line to Kenmore (25 min)",
+                "Museum of Fine Arts": "Orange Line from Haymarket to Back Bay (20 min)",
+                "Boston Children's Museum": "Walk to waterfront near Seaport (20 min) or take Silver Line from South Station",
+                "New England Aquarium": "Walk to Aquarium station area (10 min)",
+                "Newbury Street": "Orange Line from Haymarket to Back Bay (15 min)",
+                "Boston Public Library": "Orange Line from Haymarket to Back Bay → Walk (20 min)",
+                "TD Garden": "Green Line from Haymarket to North Station (5 min)",
+                "Freedom Trail": "Start your Freedom Trail exploration here!"
+            },
+            "Back Bay": {
+                "North Station": "Orange Line to Downtown Crossing → Green Line or walk (15 min)",
+                "South Station": "Orange Line to South Station (10 min)",
+                "Logan Airport": "Orange Line to Downtown Crossing → Blue Line to Airport (25 min)",
+                "Harvard Square": "Orange Line to Downtown Crossing → Red Line to Harvard (20 min)",
+                "MIT Campus": "Orange Line to Downtown Crossing → Red Line to Kendall (15 min)",
+                "Boston Common": "Walk or Green Line from Copley (10 min)",
+                "Public Garden": "Walk from Copley area (5-10 min)",
+                "Fenway Park": "Green Line from Copley to Kenmore (5 min) or walk (15 min)",
+                "Museum of Fine Arts": "Green Line from Copley → Walk or continuing travel (10 min)",
+                "Boston Children's Museum": "Orange Line to South Station → walk (20 min)",
+                "New England Aquarium": "Orange Line to Downtown Crossing → Walk (15 min)",
+                "Newbury Street": "Walk Newbury Street - Great shopping area (nearby)",
+                "Boston Public Library": "Walk to Copley Square - Right next to you! (5 min)",
+                "TD Garden": "Orange Line to North Station (12 min)",
+                "Freedom Trail": "Orange Line to State Street area (10 min)"
+            },
+            "Fenway": {
+                "North Station": "Green Line B to Downtown Crossing → Orange/Green to North Station (25 min)",
+                "South Station": "Green Line B to Downtown Crossing → Red Line South (20 min)",
+                "Logan Airport": "Green Line to downtown → Blue Line to Airport (35 min)",
+                "Harvard Square": "Green Line to downtown → Red Line to Harvard (30 min)",
+                "MIT Campus": "Green Line to downtown → Red Line to Kendall (25 min)",
+                "Boston Common": "Green Line B to Park Street (10 min)",
+                "Public Garden": "Green Line to Park Street & walk (12 min)",
+                "Fenway Park": "Walk to Fenway Park! You're right there (5-10 min)",
+                "Museum of Fine Arts": "Walk east towards museum area (10-15 min)",
+                "Boston Children's Museum": "Green Line to downtown → South Station → walk (25 min)",
+                "New England Aquarium": "Green Line to downtown → walk to waterfront (20 min)",
+                "Newbury Street": "Green Line D to Copley (5 min)",
+                "Boston Public Library": "Green Line D to Copley - Library is right there (8 min)",
+                "TD Garden": "Green Line B to North Station (20 min)",
+                "Freedom Trail": "Green Line to downtown, walk to Boston Common (15 min)"
+            },
+            "South End": {
+                "North Station": "Orange Line to Downtown Crossing → Green/Orange to North Station (15 min)",
+                "South Station": "Walk or Orange Line from nearby stations (10-15 min)",
+                "Logan Airport": "Orange Line to Downtown Crossing → Blue Line to Airport (25 min)",
+                "Harvard Square": "Orange Line to Downtown Crossing → Red Line to Harvard (20 min)",
+                "MIT Campus": "Orange Line to Downtown Crossing → Red Line to Kendall (15 min)",
+                "Boston Common": "Walk north or Orange Line to Downtown Crossing (10 min)",
+                "Public Garden": "Walk or Orange Line to Downtown Crossing (15 min)",
+                "Fenway Park": "Orange Line to Back Bay → Green Line to Kenmore (15 min)",
+                "Museum of Fine Arts": "Orange Line to Back Bay (10 min)",
+                "Boston Children's Museum": "Walk or Silver Line SL4 from nearby (20 min)",
+                "New England Aquarium": "Walk to waterfront or Orange Line (15 min)",
+                "Newbury Street": "Orange Line to Back Bay (10 min)",
+                "Boston Public Library": "Orange Line to Back Bay → Walk to Copley (12 min)",
+                "TD Garden": "Orange Line to North Station (15 min)",
+                "Freedom Trail": "Walk north to Boston Common (15 min)"
+            },
+            "Seaport": {
+                "North Station": "Silver Line to Downtown Crossing → Orange Line North (15 min)",
+                "South Station": "Walk south (5-10 min) or Silver Line SL4 (5 min)",
+                "Logan Airport": "Silver Line SL4 → Blue Line to Airport (20 min)",
+                "Harvard Square": "Silver Line to Downtown Crossing → Red Line to Harvard (25 min)",
+                "MIT Campus": "Silver Line to Downtown Crossing → Red Line to Kendall (20 min)",
+                "Boston Common": "Walk or Silver Line to Downtown Crossing (10 min)",
+                "Public Garden": "Walk or Silver Line to downtown (15 min)",
+                "Fenway Park": "Silver Line to Back Bay → Green Line to Kenmore (20 min)",
+                "Museum of Fine Arts": "Silver Line to Back Bay (15 min)",
+                "Boston Children's Museum": "Walk - Museum is in this area! (5 min)",
+                "New England Aquarium": "Walk along the Harborwalk to Aquarium (10 min)",
+                "Newbury Street": "Silver Line to Back Bay (12 min)",
+                "Boston Public Library": "Silver Line to Back Bay → Walk to Copley (15 min)",
+                "TD Garden": "Silver Line to North Station (12 min)",
+                "Freedom Trail": "Walk north along Harborwalk to start (15 min)"
+            },
+            "Cambridge": {
+                "North Station": "Red Line from Harvard to North Station (20 min)",
+                "South Station": "Red Line from Harvard to South Station (25 min)",
+                "Logan Airport": "Red Line from Harvard to Downtown Crossing → Blue Line to Airport (35 min)",
+                "Harvard Square": "Walk if nearby or Red Line to Harvard Square (depends on location)",
+                "MIT Campus": "Red Line to Kendall/MIT (5-10 min from Harvard)",
+                "Boston Common": "Red Line to Park Street (15 min)",
+                "Public Garden": "Red Line to Park Street - Garden is nearby (15 min)",
+                "Fenway Park": "Red Line to Downtown Crossing → Orange to Back Bay → Green to Kenmore (30 min)",
+                "Museum of Fine Arts": "Red Line to Downtown Crossing → Orange to Back Bay (30 min)",
+                "Boston Children's Museum": "Red Line to South Station → walk (20 min)",
+                "New England Aquarium": "Red Line to Downtown Crossing → walk to waterfront (20 min)",
+                "Newbury Street": "Red Line to Back Bay (20 min)",
+                "Boston Public Library": "Red Line to Back Bay (20 min)",
+                "TD Garden": "Red Line to North Station (20 min)",
+                "Charles River Esplanade": "Walk along Charles River from Cambridge (5-15 min)"
+            },
+            "Charlestown": {
+                "North Station": "Walk or Orange Line from nearby stations (10-15 min)",
+                "South Station": "Walk to Orange Line → South Station (15 min)",
+                "Logan Airport": "Orange Line to Downtown Crossing → Blue Line to Airport (20 min)",
+                "Harvard Square": "Orange Line to Downtown Crossing → Red Line to Harvard (25 min)",
+                "MIT Campus": "Orange Line to Downtown Crossing → Red Line to Kendall (20 min)",
+                "Boston Common": "Walk or Orange Line to Downtown Crossing (10 min)",
+                "Public Garden": "Walk or Orange Line downtown (15 min)",
+                "Fenway Park": "Orange Line to Back Bay → Green Line to Kenmore (25 min)",
+                "Museum of Fine Arts": "Orange Line to Back Bay (20 min)",
+                "Boston Children's Museum": "Walk south along Harborwalk (15 min)",
+                "New England Aquarium": "Walk south along waterfront (10 min)",
+                "Newbury Street": "Orange Line to Back Bay (15 min)",
+                "Boston Public Library": "Orange Line to Back Bay → Walk (20 min)",
+                "TD Garden": "Walk to North Station area (10 min)",
+                "Freedom Trail": "Start here! Old North Church is in Charlestown"
+            }
+        };
 
-    const routes = {
-        "North End": {
-            "North Station": "Walk to Haymarket → Green/Orange Line to North Station.",
-            "South Station": "Walk to Haymarket → Orange Line → Red Line to South Station.",
-            "Logan Airport": "Walk to Haymarket → Blue Line → Airport Shuttle."
-        },
-        "South End": {
-            "North Station": "Orange Line from Back Bay → North Station.",
-            "South Station": "Walk or Silver Line SL4.",
-            "Logan Airport": "Silver Line SL4 → SL1 to Airport."
-        },
-        "Back Bay": {
-            "North Station": "Orange Line direct.",
-            "South Station": "Orange Line → Red Line.",
-            "Logan Airport": "Back Bay Silver Line → SL1."
+        if (city && dest) {
+            const route = routes[city]?.[dest] || null;
+            
+            if (route) {
+                document.getElementById("routeBox").innerHTML = `
+                    <h1>Your Route</h1>
+                    <div class="route-details">
+                        <div class="location from">
+                            <p class="label">From:</p>
+                            <p class="name">${city}</p>
+                        </div>
+                        <div class="arrow-large">→</div>
+                        <div class="location to">
+                            <p class="label">To:</p>
+                            <p class="name">${dest}</p>
+                        </div>
+                    </div>
+                    <div class="route-instructions">
+                        <h2>Directions:</h2>
+                        <p class="instruction">${route}</p>
+                    </div>
+                    <div class="tips">
+                        <p>💡 <strong>Tip:</strong> Use a CharlieCard for convenient travel on all MBTA lines</p>
+                    </div>
+                `;
+            } else {
+                document.getElementById("routeBox").innerHTML = `
+                    <h1>Route Not Found</h1>
+                    <p>We don't have a specific route for <strong>${city} → ${dest}</strong>, but here's a general guide:</p>
+                    <p>Head to the nearest subway station and ask for directions, or check out the MBTA map at your local station.</p>
+                    <p><a href="startpage.html" class="link">Try Another Route</a></p>
+                `;
+            }
+        } else {
+            document.getElementById("routeBox").innerHTML = `
+                <h1>No Route Selected</h1>
+                <p>Please select both a starting location and a destination.</p>
+                <p><a href="startpage.html" class="link">Go Back and Plan a Route</a></p>
+            `;
         }
-    };
-
-    const routeText = routes[city]?.[dest] || "No route found for this combination.";
-
-    document.getElementById("routeBox").innerHTML = `
-        <h2>${city} → ${dest}</h2>
-        <p>${routeText}</p>
-    `;
-</script>
-
+    </script>
 </body>
+
 </html>

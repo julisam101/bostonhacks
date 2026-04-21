@@ -14,10 +14,13 @@
         
         <div class="lines-grid">
             <!-- Red Line -->
-            <div class="line-card red-line">
+            <div class="line-card red-line" id="card-Red">
                 <div class="line-header">
                     <h2>🔴 Red Line</h2>
-                    <span class="fare">$2.40</span>
+                    <div class="header-right">
+                        <span class="status-badge" id="status-Red">⏳</span>
+                        <span class="fare">$2.40</span>
+                    </div>
                 </div>
                 <p class="description">The longest line in the MBTA system, running north-south through Boston.</p>
                 <div class="stations">
@@ -37,10 +40,13 @@
             </div>
 
             <!-- Blue Line -->
-            <div class="line-card blue-line">
+            <div class="line-card blue-line" id="card-Blue">
                 <div class="line-header">
                     <h2>🔵 Blue Line</h2>
-                    <span class="fare">$2.40</span>
+                    <div class="header-right">
+                        <span class="status-badge" id="status-Blue">⏳</span>
+                        <span class="fare">$2.40</span>
+                    </div>
                 </div>
                 <p class="description">Connects Logan Airport to downtown Boston, great for travelers.</p>
                 <div class="stations">
@@ -58,10 +64,13 @@
             </div>
 
             <!-- Orange Line -->
-            <div class="line-card orange-line">
+            <div class="line-card orange-line" id="card-Orange">
                 <div class="line-header">
                     <h2>🟠 Orange Line</h2>
-                    <span class="fare">$2.40</span>
+                    <div class="header-right">
+                        <span class="status-badge" id="status-Orange">⏳</span>
+                        <span class="fare">$2.40</span>
+                    </div>
                 </div>
                 <p class="description">Runs through west and southwest Boston, connecting communities.</p>
                 <div class="stations">
@@ -80,10 +89,13 @@
             </div>
 
             <!-- Green Line -->
-            <div class="line-card green-line">
+            <div class="line-card green-line" id="card-Green">
                 <div class="line-header">
                     <h2>💚 Green Line</h2>
-                    <span class="fare">$2.40</span>
+                    <div class="header-right">
+                        <span class="status-badge" id="status-Green">⏳</span>
+                        <span class="fare">$2.40</span>
+                    </div>
                 </div>
                 <p class="description">Light rail system with four branches serving western Boston.</p>
                 <div class="stations">
@@ -103,10 +115,13 @@
             </div>
 
             <!-- Silver Line -->
-            <div class="line-card silver-line">
+            <div class="line-card silver-line" id="card-Silver">
                 <div class="line-header">
                     <h2>⚪ Silver Line</h2>
-                    <span class="fare">$2.40</span>
+                    <div class="header-right">
+                        <span class="status-badge" id="status-Silver">⏳</span>
+                        <span class="fare">$2.40</span>
+                    </div>
                 </div>
                 <p class="description">Bus rapid transit connecting Dudley Square and Logan Airport.</p>
                 <div class="stations">
@@ -121,10 +136,13 @@
             </div>
 
             <!-- Commuter Rail -->
-            <div class="line-card commuter-line">
+            <div class="line-card commuter-line" id="card-Commuter">
                 <div class="line-header">
                     <h2>🚂 Commuter Rail</h2>
-                    <span class="fare">$2.40+</span>
+                    <div class="header-right">
+                        <span class="status-badge" id="status-Commuter">⏳</span>
+                        <span class="fare">$2.40+</span>
+                    </div>
                 </div>
                 <p class="description">Regional rail serving suburbs and surrounding areas.</p>
                 <div class="stations">
@@ -142,13 +160,64 @@
             </div>
         </div>
 
-        <div class="info-box">
-            <h2>Need Help?</h2>
-            <p><a href="startpage.html" class="link-button">Plan Your Route</a></p>
-            <p><a href="attractions.html" class="link-button">View Attractions</a></p>
-            <p><a href="mainpage.html" class="link-button">Back Home</a></p>
+        <div class="nav-links">
+            <a href="startpage.html" class="link-button">Plan a Route</a>
+            <a href="attractions.html" class="link-button">Attractions</a>
+            <a href="mainpage.html" class="link-button">Home</a>
         </div>
     </div>
+
+    <script>
+        const MBTA_API_KEY = 'c5d3ce45e5864cc3aafffd54a7add1e3';
+
+        const lineMap = [
+            { id: 'Red',      routes: 'Red' },
+            { id: 'Blue',     routes: 'Blue' },
+            { id: 'Orange',   routes: 'Orange' },
+            { id: 'Green',    routes: 'Green-B,Green-C,Green-D,Green-E' },
+            { id: 'Silver',   routes: '741,742,749' },
+            { id: 'Commuter', routes: 'CR-Providence,CR-Worcester,CR-Fitchburg,CR-Lowell,CR-Newburyport,CR-Haverhill' }
+        ];
+
+        const MAJOR_FX  = ['SUSPENSION', 'SHUTTLE'];
+        const MODERATE_FX = ['DELAY', 'DETOUR', 'STOP_CLOSURE'];
+
+        async function fetchLineStatus(line) {
+            const badge = document.getElementById(`status-${line.id}`);
+            if (!badge) return;
+            try {
+                const url = `https://api-v3.mbta.com/alerts?filter[route]=${encodeURIComponent(line.routes)}&filter[activity]=BOARD,EXIT,RIDE&api_key=${MBTA_API_KEY}`;
+                const resp = await fetch(url);
+                const data = await resp.json();
+                const now = new Date();
+                const active = (data.data || []).filter(a => {
+                    if (a.attributes.severity < 4) return false;
+                    return a.attributes.active_period.some(p => {
+                        const start = new Date(p.start);
+                        const end = p.end ? new Date(p.end) : null;
+                        return start <= now && (!end || end >= now);
+                    });
+                });
+                if (active.some(a => MAJOR_FX.includes(a.attributes.effect))) {
+                    badge.textContent = '🔴 Major Disruption';
+                    badge.className = 'status-badge status-major';
+                } else if (active.some(a => MODERATE_FX.includes(a.attributes.effect))) {
+                    badge.textContent = '🟡 Delays / Issues';
+                    badge.className = 'status-badge status-minor';
+                } else if (active.length > 0) {
+                    badge.textContent = '🟡 Minor Issues';
+                    badge.className = 'status-badge status-minor';
+                } else {
+                    badge.textContent = '🟢 Normal Service';
+                    badge.className = 'status-badge status-normal';
+                }
+            } catch(e) {
+                badge.textContent = '⚪ Unknown';
+            }
+        }
+
+        lineMap.forEach(line => fetchLineStatus(line));
+    </script>
 </body>
 
 </html>

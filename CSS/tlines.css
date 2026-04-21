@@ -71,7 +71,7 @@ h1 {
 .line-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 12px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     padding-bottom: 12px;
@@ -83,6 +83,13 @@ h1 {
     flex: 1;
 }
 
+.header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
 .fare {
     background: rgba(255, 255, 255, 0.2);
     padding: 6px 12px;
@@ -90,6 +97,20 @@ h1 {
     font-weight: 700;
     font-size: 14px;
 }
+
+.status-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+}
+
+.status-normal { background: rgba(0, 210, 100, 0.35); }
+.status-minor  { background: rgba(255, 200, 0, 0.35); }
+.status-major  { background: rgba(255, 70, 70, 0.4); }
 
 .description {
     font-size: 15px;
@@ -130,22 +151,12 @@ h1 {
     border-radius: 6px;
 }
 
-.info-box {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
     margin-top: 40px;
-}
-
-.info-box h2 {
-    margin-top: 0;
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-.info-box p {
-    margin: 12px 0;
 }
 
 .link-button {

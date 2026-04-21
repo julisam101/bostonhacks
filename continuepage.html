@@ -13,10 +13,15 @@
             <p class="loading">Loading your route...</p>
         </div>
 
+        <div id="nearby-attractions"></div>
+        <div id="departures-box"></div>
+        <div id="alerts-box"></div>
+
         <div class="action-buttons">
-            <a href="startpage.html" class="btn btn-new-route">Plan Another Route</a>
-            <a href="attractions.html" class="btn btn-attractions">View Attractions</a>
-            <a href="mainpage.html" class="btn btn-home">Back Home</a>
+            <a href="startpage.html" class="btn btn-new-route">Plan a Route</a>
+            <a href="tlines.html" class="btn btn-secondary">T Lines</a>
+            <a href="attractions.html" class="btn btn-secondary">Attractions</a>
+            <a href="mainpage.html" class="btn btn-secondary">Home</a>
         </div>
     </div>
 
@@ -42,7 +47,8 @@
                 "Newbury Street": "Orange Line to Back Bay (10 min)",
                 "Boston Public Library": "Orange Line to Back Bay → Walk to Copley (12 min)",
                 "TD Garden": "Orange Line North to North Station (10 min)",
-                "Freedom Trail": "Walk and explore - Trail starts at Boston Common (nearby)"
+                "Freedom Trail": "Walk and explore - Trail starts at Boston Common (nearby)",
+                "Charles River Esplanade": "Walk to Red Line at Downtown Crossing → Charles/MGH → walk to Esplanade (15 min)"
             },
             "Beacon Hill": {
                 "North Station": "Red Line from Charles/MGH to North Station (5 min)",
@@ -59,7 +65,8 @@
                 "Newbury Street": "Walk to Charles Street area (10 min) or Red Line to Back Bay",
                 "Boston Public Library": "Red Line from Charles/MGH to Back Bay → Walk to Copley (20 min)",
                 "TD Garden": "Red Line from Charles/MGH to North Station (8 min)",
-                "Freedom Trail": "Walk to Boston Common - Trail guide available"
+                "Freedom Trail": "Walk to Boston Common - Trail guide available",
+                "Charles River Esplanade": "Walk to the Esplanade along the river (5-10 min)"
             },
             "North End": {
                 "North Station": "Green Line from Haymarket to North Station (2 min) or walk (10 min)",
@@ -76,7 +83,8 @@
                 "Newbury Street": "Orange Line from Haymarket to Back Bay (15 min)",
                 "Boston Public Library": "Orange Line from Haymarket to Back Bay → Walk (20 min)",
                 "TD Garden": "Green Line from Haymarket to North Station (5 min)",
-                "Freedom Trail": "Start your Freedom Trail exploration here!"
+                "Freedom Trail": "Start your Freedom Trail exploration here!",
+                "Charles River Esplanade": "Walk west to the Esplanade (15 min) or take Orange Line to Charles/MGH"
             },
             "Back Bay": {
                 "North Station": "Orange Line to Downtown Crossing → Green Line or walk (15 min)",
@@ -93,7 +101,8 @@
                 "Newbury Street": "Walk Newbury Street - Great shopping area (nearby)",
                 "Boston Public Library": "Walk to Copley Square - Right next to you! (5 min)",
                 "TD Garden": "Orange Line to North Station (12 min)",
-                "Freedom Trail": "Orange Line to State Street area (10 min)"
+                "Freedom Trail": "Orange Line to State Street area (10 min)",
+                "Charles River Esplanade": "Walk north to Esplanade along the river (10 min)"
             },
             "Fenway": {
                 "North Station": "Green Line B to Downtown Crossing → Orange/Green to North Station (25 min)",
@@ -110,7 +119,8 @@
                 "Newbury Street": "Green Line D to Copley (5 min)",
                 "Boston Public Library": "Green Line D to Copley - Library is right there (8 min)",
                 "TD Garden": "Green Line B to North Station (20 min)",
-                "Freedom Trail": "Green Line to downtown, walk to Boston Common (15 min)"
+                "Freedom Trail": "Green Line to downtown, walk to Boston Common (15 min)",
+                "Charles River Esplanade": "Walk along Riverway path to Esplanade (15 min) or Green Line to Charles/MGH"
             },
             "South End": {
                 "North Station": "Orange Line to Downtown Crossing → Green/Orange to North Station (15 min)",
@@ -127,7 +137,8 @@
                 "Newbury Street": "Orange Line to Back Bay (10 min)",
                 "Boston Public Library": "Orange Line to Back Bay → Walk to Copley (12 min)",
                 "TD Garden": "Orange Line to North Station (15 min)",
-                "Freedom Trail": "Walk north to Boston Common (15 min)"
+                "Freedom Trail": "Walk north to Boston Common (15 min)",
+                "Charles River Esplanade": "Orange Line to Charles/MGH → walk to Esplanade (15 min)"
             },
             "Seaport": {
                 "North Station": "Silver Line to Downtown Crossing → Orange Line North (15 min)",
@@ -144,7 +155,8 @@
                 "Newbury Street": "Silver Line to Back Bay (12 min)",
                 "Boston Public Library": "Silver Line to Back Bay → Walk to Copley (15 min)",
                 "TD Garden": "Silver Line to North Station (12 min)",
-                "Freedom Trail": "Walk north along Harborwalk to start (15 min)"
+                "Freedom Trail": "Walk north along Harborwalk to start (15 min)",
+                "Charles River Esplanade": "Silver Line to downtown → Red Line to Charles/MGH → walk (20 min)"
             },
             "Cambridge": {
                 "North Station": "Red Line from Harvard to North Station (20 min)",
@@ -178,7 +190,62 @@
                 "Newbury Street": "Orange Line to Back Bay (15 min)",
                 "Boston Public Library": "Orange Line to Back Bay → Walk (20 min)",
                 "TD Garden": "Walk to North Station area (10 min)",
-                "Freedom Trail": "Start here! Old North Church is in Charlestown"
+                "Freedom Trail": "Start here! Old North Church is in Charlestown",
+                "Charles River Esplanade": "Walk south along waterfront to Esplanade (15 min)"
+            },
+            "Chinatown": {
+                "North Station": "Orange Line from Chinatown station north → North Station (10 min)",
+                "South Station": "Orange Line south one stop to Downtown Crossing → walk, or walk directly (8 min)",
+                "Logan Airport": "Orange Line to Downtown Crossing → Blue Line to Airport (20 min)",
+                "Harvard Square": "Orange Line to Downtown Crossing → Red Line to Harvard (20 min)",
+                "MIT Campus": "Orange Line to Downtown Crossing → Red Line to Kendall/MIT (15 min)",
+                "Boston Common": "Walk north to Boston Common (10 min)",
+                "Public Garden": "Walk north through Boston Common (12 min)",
+                "Fenway Park": "Orange Line to Back Bay → Green Line to Kenmore (20 min)",
+                "Museum of Fine Arts": "Orange Line to Back Bay → walk or bus (15 min)",
+                "Boston Children's Museum": "Walk or Silver Line SL4 to Children's Museum (15 min)",
+                "New England Aquarium": "Walk east to waterfront (15 min) or Blue Line from Downtown Crossing",
+                "Newbury Street": "Orange Line to Back Bay (10 min)",
+                "Boston Public Library": "Orange Line to Back Bay → Walk to Copley (12 min)",
+                "TD Garden": "Orange Line north to North Station (10 min)",
+                "Freedom Trail": "Walk north to Boston Common to start the trail (10 min)",
+                "Charles River Esplanade": "Orange Line to Charles/MGH → walk to Esplanade (20 min)"
+            },
+            "Allston": {
+                "North Station": "Green Line B to Government Center → Green Line to North Station (30 min)",
+                "South Station": "Green Line B to Downtown Crossing → Red Line south (25 min)",
+                "Logan Airport": "Green Line B to downtown → Blue Line to Airport (40 min)",
+                "Harvard Square": "Bus 66 directly to Harvard Square (15 min)",
+                "MIT Campus": "Green Line B to downtown → Red Line to Kendall/MIT (30 min)",
+                "Boston Common": "Green Line B to Park Street (20 min)",
+                "Public Garden": "Green Line B to Arlington or Copley (20 min)",
+                "Fenway Park": "Green Line B to Kenmore (10 min) or walk",
+                "Museum of Fine Arts": "Green Line B to Longwood or walk east (15 min)",
+                "Boston Children's Museum": "Green Line B to downtown → South Station → walk (30 min)",
+                "New England Aquarium": "Green Line B to downtown → walk to waterfront (25 min)",
+                "Newbury Street": "Green Line B to Hynes Convention Center or Copley (15 min)",
+                "Boston Public Library": "Green Line B to Copley (15 min)",
+                "TD Garden": "Green Line B to Government Center → North Station (25 min)",
+                "Freedom Trail": "Green Line B to downtown → Park Street (20 min)",
+                "Charles River Esplanade": "Walk south to the Charles River Esplanade (10 min)"
+            },
+            "Brighton": {
+                "North Station": "Green Line B to Government Center → Green Line to North Station (35 min)",
+                "South Station": "Green Line B to Downtown Crossing → Red Line south (30 min)",
+                "Logan Airport": "Green Line B to downtown → Blue Line to Airport (45 min)",
+                "Harvard Square": "Bus 66 to Harvard Square (20 min)",
+                "MIT Campus": "Green Line B to downtown → Red Line to Kendall/MIT (35 min)",
+                "Boston Common": "Green Line B to Park Street (25 min)",
+                "Public Garden": "Green Line B to Arlington or Copley (25 min)",
+                "Fenway Park": "Green Line B to Kenmore (15 min)",
+                "Museum of Fine Arts": "Green Line B to Museum of Fine Arts stop (20 min)",
+                "Boston Children's Museum": "Green Line B to downtown → South Station → walk (35 min)",
+                "New England Aquarium": "Green Line B to downtown → walk to waterfront (30 min)",
+                "Newbury Street": "Green Line B to Hynes Convention Center or Copley (20 min)",
+                "Boston Public Library": "Green Line B to Copley (20 min)",
+                "TD Garden": "Green Line B to Government Center → North Station (30 min)",
+                "Freedom Trail": "Green Line B to downtown → Park Street (25 min)",
+                "Charles River Esplanade": "Walk or bus south to the Charles River (15 min)"
             }
         };
 
@@ -206,7 +273,19 @@
                     <div class="tips">
                         <p>💡 <strong>Tip:</strong> Use a CharlieCard for convenient travel on all MBTA lines</p>
                     </div>
+                    <div class="route-actions">
+                        <button id="toggle-attractions" class="route-dropdown-btn" type="button" aria-expanded="false">
+                            See attractions near ${dest} ▼
+                        </button>
+                    </div>
                 `;
+
+                // Fetch live MBTA alerts for the lines in this route
+                fetchAlertsForRoute(route);
+                // Fetch next departures from nearest stop
+                fetchPredictions(city);
+                // Show attractions near the destination
+                renderAttractionsBox(dest);
             } else {
                 document.getElementById("routeBox").innerHTML = `
                     <h1>Route Not Found</h1>
@@ -221,6 +300,319 @@
                 <p>Please select both a starting location and a destination.</p>
                 <p><a href="startpage.html" class="link">Go Back and Plan a Route</a></p>
             `;
+        }
+
+        const MBTA_API_KEY = 'c5d3ce45e5864cc3aafffd54a7add1e3';
+
+        // Attractions keyed by destination
+        const destAttractions = {
+            "North Station": {
+                area: "TD Garden & Government Center",
+                spots: [
+                    { name: "TD Garden", desc: "Home of the Celtics & Bruins — catch a game or tour the arena" },
+                    { name: "Boston Sports Museum", desc: "Celebrate Boston's legendary championship history" },
+                    { name: "Faneuil Hall & Quincy Market", desc: "Historic marketplace with shops, food stalls, and street performers" },
+                    { name: "Freedom Trail", desc: "16-site historic walking trail — North Station is a great starting point" }
+                ]
+            },
+            "South Station": {
+                area: "Downtown & Waterfront",
+                spots: [
+                    { name: "Boston Tea Party Ships Museum", desc: "Interactive Revolutionary War experience on the waterfront" },
+                    { name: "Rose Kennedy Greenway", desc: "Beautiful linear park winding through downtown" },
+                    { name: "Faneuil Hall & Quincy Market", desc: "Historic marketplace a short walk away" },
+                    { name: "Boston Children's Museum", desc: "Hands-on fun for all ages, steps from South Station" }
+                ]
+            },
+            "Logan Airport": {
+                area: "Boston Waterfront",
+                spots: [
+                    { name: "New England Aquarium", desc: "Marine life exhibits — right near the waterfront ferry terminal" },
+                    { name: "Harborwalk", desc: "Scenic waterfront promenade stretching across the harbor" },
+                    { name: "Boston Tea Party Ships Museum", desc: "Quick Silver Line ride from the airport to this interactive museum" }
+                ]
+            },
+            "Harvard Square": {
+                area: "Cambridge",
+                spots: [
+                    { name: "Harvard University", desc: "Tour the iconic Ivy League campus and historic Harvard Yard" },
+                    { name: "MIT Campus", desc: "A short Red Line hop to the world-class engineering campus" },
+                    { name: "The Coop", desc: "Harvard's legendary college bookstore and souvenir spot" },
+                    { name: "Harvard Square", desc: "Cafes, independent shops, street performers, and vibrant nightlife" }
+                ]
+            },
+            "MIT Campus": {
+                area: "Kendall Square / Cambridge",
+                spots: [
+                    { name: "MIT Campus", desc: "Explore the Infinite Corridor, Stata Center, and stunning architecture" },
+                    { name: "Harvard Square", desc: "Neighboring college district with great food and shops (10 min by Red Line)" },
+                    { name: "Charles River", desc: "Scenic riverside walks and views from the Harvard Bridge" }
+                ]
+            },
+            "Boston Common": {
+                area: "Downtown Boston",
+                spots: [
+                    { name: "Public Garden", desc: "Adjacent to the Common — famous swan boats and the Ducklings statue" },
+                    { name: "Freedom Trail", desc: "The trail starts right here at Boston Common" },
+                    { name: "Beacon Hill", desc: "Picturesque cobblestone streets just north of the Common" },
+                    { name: "Downtown Crossing", desc: "Major shopping district steps away" }
+                ]
+            },
+            "Public Garden": {
+                area: "Beacon Hill & Back Bay",
+                spots: [
+                    { name: "Boston Common", desc: "America's oldest public park, directly adjacent" },
+                    { name: "Beacon Hill", desc: "Acorn Street, Charles Street antiques, and stunning row houses" },
+                    { name: "Newbury Street", desc: "Upscale shopping and dining, a few blocks away" },
+                    { name: "Freedom Trail", desc: "Historic 2.4-mile walking trail starting nearby" }
+                ]
+            },
+            "Fenway Park": {
+                area: "Fenway",
+                spots: [
+                    { name: "Fenway Park", desc: "Tour the legendary home of the Boston Red Sox" },
+                    { name: "Museum of Fine Arts", desc: "World-class art museum within walking distance" },
+                    { name: "Newbury Street", desc: "Upscale shopping and dining, a short walk or one Green Line stop" },
+                    { name: "Boston Public Library", desc: "Architectural masterpiece at Copley Square" }
+                ]
+            },
+            "Museum of Fine Arts": {
+                area: "Fenway / Back Bay",
+                spots: [
+                    { name: "Museum of Fine Arts", desc: "World-class collection spanning 5,000 years of art" },
+                    { name: "Fenway Park", desc: "Catch a Red Sox game or take a ballpark tour" },
+                    { name: "Isabella Stewart Gardner Museum", desc: "Stunning Venetian-style palazzo museum nearby" },
+                    { name: "Newbury Street", desc: "Boston's trendiest shopping and dining street" }
+                ]
+            },
+            "Boston Children's Museum": {
+                area: "Seaport District",
+                spots: [
+                    { name: "Boston Children's Museum", desc: "Three floors of hands-on exhibits for kids and families" },
+                    { name: "Institute of Contemporary Art (ICA)", desc: "Modern art museum with stunning harbor views" },
+                    { name: "Harborwalk", desc: "Scenic waterfront promenade perfect for a stroll" },
+                    { name: "Seaport Common", desc: "Waterfront park hosting events and food trucks" }
+                ]
+            },
+            "New England Aquarium": {
+                area: "Waterfront & North End",
+                spots: [
+                    { name: "New England Aquarium", desc: "Giant ocean tank with sharks, rays, and a sea turtle" },
+                    { name: "Paul Revere House", desc: "Oldest building in downtown Boston — just a short walk through the North End" },
+                    { name: "Old North Church", desc: "Where the 'one if by land' signal was given" },
+                    { name: "Faneuil Hall & Quincy Market", desc: "Historic marketplace right around the corner" }
+                ]
+            },
+            "Newbury Street": {
+                area: "Back Bay",
+                spots: [
+                    { name: "Newbury Street", desc: "Eight blocks of boutiques, galleries, and restaurants" },
+                    { name: "Boston Public Library", desc: "Stunning Copley Square building — free to enter" },
+                    { name: "Copley Square", desc: "Beautiful plaza surrounded by historic architecture" },
+                    { name: "Public Garden", desc: "A relaxing walk just a few blocks toward the Common" }
+                ]
+            },
+            "Boston Public Library": {
+                area: "Copley Square / Back Bay",
+                spots: [
+                    { name: "Boston Public Library", desc: "Explore the stunning McKim building — Bates Hall and the courtyard are must-sees" },
+                    { name: "Copley Square", desc: "Iconic plaza with Trinity Church and the Fairmont Copley" },
+                    { name: "Newbury Street", desc: "Steps away — great for shopping, coffee, and people-watching" },
+                    { name: "Public Garden", desc: "Short walk down Boylston or Arlington Street" }
+                ]
+            },
+            "TD Garden": {
+                area: "North Station & North End",
+                spots: [
+                    { name: "TD Garden", desc: "Home of the Celtics & Bruins — check the schedule for events" },
+                    { name: "Boston Sports Museum", desc: "Inside TD Garden — a tribute to Boston's championship legacy" },
+                    { name: "North End", desc: "Boston's Italian neighborhood with amazing restaurants, a short walk away" },
+                    { name: "Faneuil Hall & Quincy Market", desc: "Historic marketplace just south of North Station" }
+                ]
+            },
+            "Freedom Trail": {
+                area: "North End & Downtown",
+                spots: [
+                    { name: "Freedom Trail", desc: "Follow the red line past 16 historic sites across 2.4 miles" },
+                    { name: "Paul Revere House", desc: "Step inside the oldest building in downtown Boston" },
+                    { name: "Old North Church", desc: "The lanterns that launched a revolution — still standing" },
+                    { name: "Faneuil Hall & Quincy Market", desc: "A Freedom Trail landmark and great food destination" }
+                ]
+            },
+            "Charles River Esplanade": {
+                area: "Esplanade & Beacon Hill",
+                spots: [
+                    { name: "Hatch Shell", desc: "Outdoor concert venue — catch the Boston Pops or free summer events" },
+                    { name: "Charles River Esplanade", desc: "Walk, run, or kayak along 3 miles of scenic riverfront" },
+                    { name: "Museum of Science", desc: "Interactive exhibits and OMNIMAX theater at the river's edge" },
+                    { name: "Beacon Hill", desc: "Charming cobblestone streets and Charles Street antiques just steps away" }
+                ]
+            }
+        };
+
+        function renderAttractionsBox(dest) {
+            const box = document.getElementById('nearby-attractions');
+            if (!box) return;
+            const data = destAttractions[dest];
+            if (!data) {
+                box.innerHTML = '';
+                return;
+            }
+            const items = data.spots.map(s =>
+                `<div class="attr-row">
+                    <span class="attr-name">${s.name}</span>
+                    <span class="attr-desc">${s.desc}</span>
+                </div>`
+            ).join('');
+            box.innerHTML = `<div class="live-box attractions-box attractions-collapsed" id="attractions-panel">
+                <p class="live-title">📍 Nearby Attractions — ${data.area}</p>
+                ${items}
+                <a href="attractions.html" class="attr-see-all">See full attractions guide →</a>
+            </div>`;
+
+            const toggleBtn = document.getElementById('toggle-attractions');
+            const panel = document.getElementById('attractions-panel');
+            if (!toggleBtn || !panel) return;
+
+            toggleBtn.addEventListener('click', () => {
+                const isOpen = panel.classList.contains('attractions-open');
+                panel.classList.toggle('attractions-open', !isOpen);
+                panel.classList.toggle('attractions-collapsed', isOpen);
+                toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+                toggleBtn.textContent = !isOpen
+                    ? `Hide attractions near ${dest} ▲`
+                    : `See attractions near ${dest} ▼`;
+            });
+        }
+
+
+        const neighborhoodStops = {
+            "Downtown":    { id: "place-dwnxg", name: "Downtown Crossing" },
+            "Beacon Hill": { id: "place-chmnl", name: "Charles/MGH" },
+            "North End":   { id: "place-haecl", name: "Haymarket" },
+            "Back Bay":    { id: "place-bbsta", name: "Back Bay" },
+            "Fenway":      { id: "place-kencl", name: "Kenmore" },
+            "South End":   { id: "place-tumnl", name: "Tufts Medical Center" },
+            "Seaport":     { id: "place-wtcst", name: "World Trade Center" },
+            "Cambridge":   { id: "place-harsq", name: "Harvard" },
+            "Charlestown": { id: "place-ccmnl", name: "Community College" },
+            "Chinatown":   { id: "place-chncl", name: "Chinatown" },
+            "Allston":     { id: "place-harvy", name: "Harvard Ave" },
+            "Brighton":    { id: "place-lake",  name: "Lake Street" }
+        };
+
+        const ROUTE_LABELS = {
+            'Red': '🔴 Red Line', 'Orange': '🟠 Orange Line', 'Blue': '🔵 Blue Line',
+            'Green-B': '💚 Green B', 'Green-C': '💚 Green C',
+            'Green-D': '💚 Green D', 'Green-E': '💚 Green E',
+            '741': '⚪ Silver SL1', '742': '⚪ Silver SL2', '749': '⚪ Silver SL5'
+        };
+
+        async function fetchPredictions(city) {
+            const stop = neighborhoodStops[city];
+            if (!stop) return;
+            try {
+                const url = `https://api-v3.mbta.com/predictions?filter[stop]=${stop.id}&sort=departure_time&page[limit]=8&api_key=${MBTA_API_KEY}`;
+                const resp = await fetch(url);
+                const data = await resp.json();
+                const now = new Date();
+                const preds = (data.data || []).filter(p => {
+                    const t = p.attributes.departure_time || p.attributes.arrival_time;
+                    return t && new Date(t) >= now;
+                }).slice(0, 5);
+                renderPredictionsBox(preds, stop.name);
+            } catch(e) {
+                renderPredictionsBox(null, stop.name);
+            }
+        }
+
+        function renderPredictionsBox(preds, stopName) {
+            const box = document.getElementById('departures-box');
+            if (!box) return;
+            if (!preds) {
+                box.innerHTML = `<div class="live-box"><p class="live-status">⚠️ Could not load departures for ${stopName}</p></div>`;
+                return;
+            }
+            if (preds.length === 0) {
+                box.innerHTML = `<div class="live-box"><p class="live-status">🚉 No upcoming departures at ${stopName}</p></div>`;
+                return;
+            }
+            const now = new Date();
+            const items = preds.map(p => {
+                const routeId = p.relationships?.route?.data?.id || '';
+                const depTime = p.attributes.departure_time || p.attributes.arrival_time;
+                let timeStr = '—';
+                let urgent = false;
+                if (depTime) {
+                    const mins = Math.round((new Date(depTime) - now) / 60000);
+                    if (mins <= 0) { timeStr = 'Now'; urgent = true; }
+                    else if (mins < 60) { timeStr = `${mins} min`; urgent = mins <= 2; }
+                    else timeStr = new Date(depTime).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'});
+                }
+                const label = ROUTE_LABELS[routeId] || routeId;
+                const status = p.attributes.status ? `<span class="dep-status">${p.attributes.status}</span>` : '';
+                return `<div class="dep-row">
+                    <span class="dep-route">${label}</span>
+                    ${status}
+                    <span class="dep-time${urgent ? ' dep-urgent' : ''}">${timeStr}</span>
+                </div>`;
+            }).join('');
+            box.innerHTML = `<div class="live-box">
+                <p class="live-title">🚉 Next Departures — ${stopName}</p>
+                ${items}
+            </div>`;
+        }
+
+        function detectLines(routeText) {
+            const lines = [];
+            if (/orange\s+line/i.test(routeText)) lines.push('Orange');
+            if (/red\s+line/i.test(routeText)) lines.push('Red');
+            if (/blue\s+line/i.test(routeText)) lines.push('Blue');
+            if (/green\s+line/i.test(routeText)) lines.push('Green-B', 'Green-C', 'Green-D', 'Green-E');
+            if (/silver\s+line/i.test(routeText)) lines.push('741', '742', '749');
+            return lines;
+        }
+
+        async function fetchAlertsForRoute(routeText) {
+            const lines = detectLines(routeText);
+            if (lines.length === 0) {
+                renderAlertsBox([]);
+                return;
+            }
+            try {
+                const routeFilter = lines.join(',');
+                const url = `https://api-v3.mbta.com/alerts?filter[route]=${routeFilter}&filter[activity]=BOARD,EXIT,RIDE&api_key=${MBTA_API_KEY}`;
+                const resp = await fetch(url);
+                const data = await resp.json();
+                const now = new Date();
+                const active = (data.data || []).filter(alert => {
+                    if (alert.attributes.severity < 5) return false;
+                    return alert.attributes.active_period.some(p => {
+                        const start = new Date(p.start);
+                        const end = p.end ? new Date(p.end) : null;
+                        return start <= now && (!end || end >= now);
+                    });
+                });
+                renderAlertsBox(active);
+            } catch (e) {
+                renderAlertsBox(null);
+            }
+        }
+
+        function renderAlertsBox(alerts) {
+            const box = document.getElementById('alerts-box');
+            if (!box) return;
+            if (alerts === null) {
+                box.innerHTML = '<div class="live-box"><p class="live-status">⚠️ Could not load live alerts</p></div>';
+            } else if (alerts.length === 0) {
+                box.innerHTML = '<div class="live-box"><p class="live-status">✅ No active service alerts for your lines</p></div>';
+            } else {
+                const items = alerts.slice(0, 4).map(a => {
+                    const icon = a.attributes.severity >= 7 ? '🚨' : '⚠️';
+                    return `<div class="alert-item">${icon} ${a.attributes.header}</div>`;
+                }).join('');
+                box.innerHTML = `<div class="live-box"><p class="live-title">⚡ Live Service Alerts</p>${items}</div>`;
+            }
         }
     </script>
 </body>

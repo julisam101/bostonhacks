@@ -114,6 +114,28 @@ body {
     font-weight: 700;
 }
 
+.route-actions {
+    margin-top: 16px;
+}
+
+.route-dropdown-btn {
+    width: 100%;
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    color: #FFD700;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.route-dropdown-btn:hover {
+    background: rgba(255, 215, 0, 0.22);
+    border-color: rgba(255, 215, 0, 0.75);
+}
+
 .route-card .link {
     color: #FFD700;
     text-decoration: none;
@@ -127,8 +149,11 @@ body {
 
 .action-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
+    margin-top: 20px;
 }
 
 .btn {
@@ -149,8 +174,7 @@ body {
     color: #007A33;
 }
 
-.btn-attractions,
-.btn-home {
+.btn-secondary {
     background: rgba(255, 255, 255, 0.15);
     color: white;
 }
@@ -158,6 +182,114 @@ body {
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Live info boxes (departures + alerts) ── */
+.live-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 18px 22px;
+}
+
+.live-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.4px;
+}
+
+.live-status {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ── Next departures ── */
+.dep-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 14px;
+}
+
+.dep-route {
+    flex: 1;
+    font-weight: 600;
+}
+
+.dep-status {
+    font-size: 12px;
+    opacity: 0.75;
+    font-style: italic;
+}
+
+.dep-time {
+    font-weight: 700;
+    font-size: 15px;
+    min-width: 52px;
+    text-align: right;
+}
+
+.dep-urgent {
+    color: #FFD700;
+}
+
+/* ── Service alerts ── */
+.alert-item {
+    font-size: 13px;
+    padding: 9px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    line-height: 1.5;
+}
+
+/* ── Nearby attractions ── */
+.attractions-box {
+    border-color: rgba(255, 220, 100, 0.3);
+}
+
+.attractions-collapsed {
+    display: none;
+}
+
+.attractions-open {
+    display: block;
+}
+
+.attr-row {
+    display: flex;
+    flex-direction: column;
+    padding: 9px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    gap: 2px;
+}
+
+.attr-name {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.attr-desc {
+    font-size: 13px;
+    opacity: 0.82;
+    line-height: 1.4;
+}
+
+.attr-see-all {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.attr-see-all:hover {
+    opacity: 1;
+    text-decoration: underline;
 }
 
 @media (max-width: 600px) {

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MBTA T Lines | Boston Transportation</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <link rel="stylesheet" href="CSS/tlines.css">
 </head>
 
@@ -11,10 +12,21 @@
     <div class="container">
         <h1>Boston MBTA T Lines</h1>
         <p class="subtitle">Explore all the major transit lines in Boston</p>
+
+        <section class="map-section map-hidden" id="map-section" aria-label="MBTA network map">
+            <div class="map-header-row">
+                <h2>Live MBTA Network Map</h2>
+                <div class="map-controls">
+                    <p id="map-status" class="map-status">Select a line card to view its route map and stops.</p>
+                    <button id="map-toggle-btn" class="map-toggle-btn" type="button" aria-expanded="true" aria-label="Minimize map">−</button>
+                </div>
+            </div>
+            <div id="mbta-map" class="mbta-map"></div>
+        </section>
         
         <div class="lines-grid">
             <!-- Red Line -->
-            <div class="line-card red-line" id="card-Red">
+            <div class="line-card red-line" id="card-Red" data-line="Red" role="button" tabindex="0">
                 <div class="line-header">
                     <h2>🔴 Red Line</h2>
                     <div class="header-right">
@@ -40,7 +52,7 @@
             </div>
 
             <!-- Blue Line -->
-            <div class="line-card blue-line" id="card-Blue">
+            <div class="line-card blue-line" id="card-Blue" data-line="Blue" role="button" tabindex="0">
                 <div class="line-header">
                     <h2>🔵 Blue Line</h2>
                     <div class="header-right">
@@ -64,7 +76,7 @@
             </div>
 
             <!-- Orange Line -->
-            <div class="line-card orange-line" id="card-Orange">
+            <div class="line-card orange-line" id="card-Orange" data-line="Orange" role="button" tabindex="0">
                 <div class="line-header">
                     <h2>🟠 Orange Line</h2>
                     <div class="header-right">
@@ -89,7 +101,7 @@
             </div>
 
             <!-- Green Line -->
-            <div class="line-card green-line" id="card-Green">
+            <div class="line-card green-line" id="card-Green" data-line="Green" role="button" tabindex="0">
                 <div class="line-header">
                     <h2>💚 Green Line</h2>
                     <div class="header-right">
@@ -115,7 +127,7 @@
             </div>
 
             <!-- Silver Line -->
-            <div class="line-card silver-line" id="card-Silver">
+            <div class="line-card silver-line" id="card-Silver" data-line="Silver" role="button" tabindex="0">
                 <div class="line-header">
                     <h2>⚪ Silver Line</h2>
                     <div class="header-right">
@@ -136,7 +148,7 @@
             </div>
 
             <!-- Commuter Rail -->
-            <div class="line-card commuter-line" id="card-Commuter">
+            <div class="line-card commuter-line" id="card-Commuter" data-line="Commuter" role="button" tabindex="0">
                 <div class="line-header">
                     <h2>🚂 Commuter Rail</h2>
                     <div class="header-right">
@@ -148,12 +160,12 @@
                 <div class="stations">
                     <h3>Major Lines:</h3>
                     <ul>
-                        <li>Framingham/Worcester</li>
-                        <li>Providence/Stoughton</li>
-                        <li>Fitchburg/Leominster</li>
-                        <li>Lowell</li>
-                        <li>Newburyport/Rockport</li>
-                        <li>Greenbush</li>
+                        <li><button class="commuter-route-btn" type="button" data-routes="CR-Worcester" data-label="Framingham/Worcester">Framingham/Worcester</button></li>
+                        <li><button class="commuter-route-btn" type="button" data-routes="CR-Providence,CR-Stoughton" data-label="Providence/Stoughton">Providence/Stoughton</button></li>
+                        <li><button class="commuter-route-btn" type="button" data-routes="CR-Fitchburg" data-label="Fitchburg/Leominster">Fitchburg/Leominster</button></li>
+                        <li><button class="commuter-route-btn" type="button" data-routes="CR-Lowell" data-label="Lowell">Lowell</button></li>
+                        <li><button class="commuter-route-btn" type="button" data-routes="CR-Newburyport,CR-Rockport" data-label="Newburyport/Rockport">Newburyport/Rockport</button></li>
+                        <li><button class="commuter-route-btn" type="button" data-routes="CR-Greenbush" data-label="Greenbush">Greenbush</button></li>
                     </ul>
                 </div>
                 <p class="highlights">✨ Extended reach to suburbs and beyond Boston</p>
@@ -162,11 +174,11 @@
 
         <div class="nav-links">
             <a href="startpage.html" class="link-button">Plan a Route</a>
-            <a href="attractions.html" class="link-button">Attractions</a>
             <a href="mainpage.html" class="link-button">Home</a>
         </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         const MBTA_API_KEY = 'c5d3ce45e5864cc3aafffd54a7add1e3';
 
@@ -179,8 +191,258 @@
             { id: 'Commuter', routes: 'CR-Providence,CR-Worcester,CR-Fitchburg,CR-Lowell,CR-Newburyport,CR-Haverhill' }
         ];
 
+        const lineConfigs = {
+            Red: {
+                title: 'Red Line',
+                color: '#DA291C',
+                routeIds: ['Red']
+            },
+            Blue: {
+                title: 'Blue Line',
+                color: '#003DA5',
+                routeIds: ['Blue']
+            },
+            Orange: {
+                title: 'Orange Line',
+                color: '#ED8B00',
+                routeIds: ['Orange']
+            },
+            Green: {
+                title: 'Green Line',
+                color: '#00843D',
+                routeIds: ['Green-B', 'Green-C', 'Green-D', 'Green-E']
+            },
+            Silver: {
+                title: 'Silver Line',
+                color: '#9CA3AF',
+                routeIds: ['741', '742', '749']
+            },
+            Commuter: {
+                title: 'Commuter Rail',
+                color: '#6D28D9',
+                routeIds: ['CR-Providence', 'CR-Worcester', 'CR-Fitchburg', 'CR-Lowell', 'CR-Newburyport', 'CR-Haverhill']
+            }
+        };
+
         const MAJOR_FX  = ['SUSPENSION', 'SHUTTLE'];
         const MODERATE_FX = ['DELAY', 'DETOUR', 'STOP_CLOSURE'];
+
+        function decodePolyline(encoded) {
+            let index = 0;
+            const coordinates = [];
+            let lat = 0;
+            let lng = 0;
+
+            while (index < encoded.length) {
+                let shift = 0;
+                let result = 0;
+                let byte;
+                do {
+                    byte = encoded.charCodeAt(index++) - 63;
+                    result |= (byte & 0x1f) << shift;
+                    shift += 5;
+                } while (byte >= 0x20);
+                const deltaLat = (result & 1) ? ~(result >> 1) : (result >> 1);
+                lat += deltaLat;
+
+                shift = 0;
+                result = 0;
+                do {
+                    byte = encoded.charCodeAt(index++) - 63;
+                    result |= (byte & 0x1f) << shift;
+                    shift += 5;
+                } while (byte >= 0x20);
+                const deltaLng = (result & 1) ? ~(result >> 1) : (result >> 1);
+                lng += deltaLng;
+
+                coordinates.push([lat / 1e5, lng / 1e5]);
+            }
+
+            return coordinates;
+        }
+
+        async function fetchShapesForRoute(routeId) {
+            const url = `https://api-v3.mbta.com/shapes?filter[route]=${encodeURIComponent(routeId)}&page[limit]=1000&api_key=${MBTA_API_KEY}`;
+            const resp = await fetch(url);
+            if (!resp.ok) return [];
+            const payload = await resp.json();
+            return Array.isArray(payload.data) ? payload.data : [];
+        }
+
+        async function fetchStopsForRoute(routeId) {
+            const url = `https://api-v3.mbta.com/stops?filter[route]=${encodeURIComponent(routeId)}&page[limit]=1000&api_key=${MBTA_API_KEY}`;
+            const resp = await fetch(url);
+            if (!resp.ok) return [];
+            const payload = await resp.json();
+            return Array.isArray(payload.data) ? payload.data : [];
+        }
+
+        let map;
+        const lineLayer = L.featureGroup();
+        const stopLayer = L.featureGroup();
+
+        function initTransitMap() {
+            if (map) return;
+            const statusEl = document.getElementById('map-status');
+            map = L.map('mbta-map', { zoomControl: true }).setView([42.3601, -71.0589], 11);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            lineLayer.addTo(map);
+            stopLayer.addTo(map);
+
+            if (statusEl) statusEl.textContent = 'Select a line card to view its route map and stops.';
+        }
+
+        function setMapCollapsed(collapsed) {
+            const mapSection = document.getElementById('map-section');
+            const toggleBtn = document.getElementById('map-toggle-btn');
+            if (!mapSection || !toggleBtn) return;
+
+            mapSection.classList.toggle('map-collapsed', collapsed);
+            toggleBtn.textContent = collapsed ? '+' : '−';
+            toggleBtn.setAttribute('aria-expanded', String(!collapsed));
+            toggleBtn.setAttribute('aria-label', collapsed ? 'Expand map' : 'Minimize map');
+
+            if (!collapsed && map) {
+                setTimeout(() => map.invalidateSize(), 0);
+            }
+        }
+
+        function setSelectedCard(lineId) {
+            document.querySelectorAll('.line-card').forEach(card => {
+                card.classList.toggle('line-card-active', card.dataset.line === lineId);
+            });
+        }
+
+        async function renderRouteSetOnMap(routeIds, title, color, modeLineId) {
+            const statusEl = document.getElementById('map-status');
+            lineLayer.clearLayers();
+            stopLayer.clearLayers();
+
+            if (statusEl) statusEl.textContent = `Loading ${title} route and stops...`;
+
+            try {
+                const [shapeGroups, stopGroups] = await Promise.all([
+                    Promise.all(routeIds.map(routeId => fetchShapesForRoute(routeId))),
+                    Promise.all(routeIds.map(routeId => fetchStopsForRoute(routeId)))
+                ]);
+
+                shapeGroups.flat().forEach(shape => {
+                    const encoded = shape.attributes?.polyline;
+                    if (!encoded) return;
+                    const points = decodePolyline(encoded);
+                    if (!points.length) return;
+                    L.polyline(points, {
+                        color,
+                        weight: modeLineId === 'Commuter' ? 2.5 : 4,
+                        opacity: 0.9
+                    }).addTo(lineLayer);
+                });
+
+                const seenStops = new Set();
+                stopGroups.flat().forEach(stop => {
+                    const stopId = stop.id;
+                    if (!stopId || seenStops.has(stopId)) return;
+                    const attrs = stop.attributes || {};
+                    if (attrs.latitude == null || attrs.longitude == null) return;
+                    seenStops.add(stopId);
+
+                    L.circleMarker([attrs.latitude, attrs.longitude], {
+                        radius: modeLineId === 'Commuter' ? 3 : 4,
+                        color: '#ffffff',
+                        weight: 1,
+                        fillColor: color,
+                        fillOpacity: 0.95
+                    }).bindTooltip(attrs.name || stopId, {
+                        permanent: true,
+                        direction: 'top',
+                        className: 'stop-label'
+                    }).addTo(stopLayer);
+                });
+
+                const layersToFit = L.featureGroup([...lineLayer.getLayers(), ...stopLayer.getLayers()]);
+                if (layersToFit.getLayers().length > 0) {
+                    map.fitBounds(layersToFit.getBounds(), { padding: [20, 20] });
+                    if (statusEl) statusEl.textContent = `Showing ${title} with labeled stops.`;
+                } else if (statusEl) {
+                    if (statusEl) statusEl.textContent = `No map data available for ${title} right now.`;
+                }
+            } catch (err) {
+                if (statusEl) statusEl.textContent = `Could not load ${title} map right now.`;
+            }
+
+            map.invalidateSize();
+            document.getElementById('mbta-map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        async function showLineOnMap(lineId) {
+            const config = lineConfigs[lineId];
+            if (!config) return;
+
+            const mapSection = document.getElementById('map-section');
+            const statusEl = document.getElementById('map-status');
+            if (mapSection) {
+                mapSection.classList.remove('map-hidden');
+            }
+            setMapCollapsed(false);
+
+            initTransitMap();
+            setSelectedCard(lineId);
+            await renderRouteSetOnMap(config.routeIds, config.title, config.color, lineId);
+        }
+
+        function wireLineCardClicks() {
+            document.querySelectorAll('.line-card').forEach(card => {
+                const lineId = card.dataset.line;
+                if (!lineId) return;
+
+                card.addEventListener('click', () => showLineOnMap(lineId));
+                card.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        showLineOnMap(lineId);
+                    }
+                });
+            });
+        }
+
+        function wireCommuterRouteClicks() {
+            document.querySelectorAll('.commuter-route-btn').forEach(btn => {
+                const routeList = btn.dataset.routes;
+                const label = btn.dataset.label;
+                if (!routeList || !label) return;
+
+                btn.addEventListener('click', async e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const mapSection = document.getElementById('map-section');
+                    if (mapSection) mapSection.classList.remove('map-hidden');
+                    setMapCollapsed(false);
+
+                    initTransitMap();
+                    setSelectedCard('Commuter');
+
+                    const routeIds = routeList.split(',').map(r => r.trim()).filter(Boolean);
+                    await renderRouteSetOnMap(routeIds, `Commuter Rail: ${label}`, '#6D28D9', 'Commuter');
+                });
+            });
+        }
+
+        function wireMapToggle() {
+            const toggleBtn = document.getElementById('map-toggle-btn');
+            const mapSection = document.getElementById('map-section');
+            if (!toggleBtn || !mapSection) return;
+
+            toggleBtn.addEventListener('click', () => {
+                const collapsed = mapSection.classList.contains('map-collapsed');
+                setMapCollapsed(!collapsed);
+            });
+        }
 
         async function fetchLineStatus(line) {
             const badge = document.getElementById(`status-${line.id}`);
@@ -216,6 +478,9 @@
             }
         }
 
+        wireMapToggle();
+        wireLineCardClicks();
+        wireCommuterRouteClicks();
         lineMap.forEach(line => fetchLineStatus(line));
     </script>
 </body>

@@ -20,7 +20,6 @@
         <div class="action-buttons">
             <a href="startpage.html" class="btn btn-new-route">Plan a Route</a>
             <a href="tlines.html" class="btn btn-secondary">T Lines</a>
-            <a href="attractions.html" class="btn btn-secondary">Attractions</a>
             <a href="mainpage.html" class="btn btn-secondary">Home</a>
         </div>
     </div>
@@ -275,7 +274,7 @@
                     </div>
                     <div class="route-actions">
                         <button id="toggle-attractions" class="route-dropdown-btn" type="button" aria-expanded="false">
-                            See attractions near ${dest} ▼
+                            See attractions nearby ▼
                         </button>
                     </div>
                 `;
@@ -303,6 +302,26 @@
         }
 
         const MBTA_API_KEY = 'c5d3ce45e5864cc3aafffd54a7add1e3';
+        const GOOGLE_PLACES_API_KEY = '';
+
+        const destinationCoords = {
+            "North Station": { lat: 42.365577, lng: -71.061290 },
+            "South Station": { lat: 42.352271, lng: -71.055242 },
+            "Logan Airport": { lat: 42.365613, lng: -71.009560 },
+            "Harvard Square": { lat: 42.373362, lng: -71.118956 },
+            "MIT Campus": { lat: 42.360091, lng: -71.094160 },
+            "Boston Common": { lat: 42.355000, lng: -71.065600 },
+            "Public Garden": { lat: 42.354040, lng: -71.070520 },
+            "Fenway Park": { lat: 42.346676, lng: -71.097218 },
+            "Museum of Fine Arts": { lat: 42.339381, lng: -71.094160 },
+            "Boston Children's Museum": { lat: 42.351390, lng: -71.049670 },
+            "New England Aquarium": { lat: 42.359360, lng: -71.049600 },
+            "Newbury Street": { lat: 42.349250, lng: -71.082740 },
+            "Boston Public Library": { lat: 42.349280, lng: -71.078240 },
+            "TD Garden": { lat: 42.366303, lng: -71.062228 },
+            "Freedom Trail": { lat: 42.355000, lng: -71.065600 },
+            "Charles River Esplanade": { lat: 42.355530, lng: -71.072780 }
+        };
 
         // Attractions keyed by destination
         const destAttractions = {
@@ -450,6 +469,38 @@
             }
         };
 
+        async function fetchGoogleNearbyAttractions(dest) {
+            if (!GOOGLE_PLACES_API_KEY) return null;
+            const coords = destinationCoords[dest];
+            if (!coords) return null;
+
+            try {
+                const params = new URLSearchParams({
+                    location: `${coords.lat},${coords.lng}`,
+                    radius: '1600',
+                    type: 'tourist_attraction',
+                    key: GOOGLE_PLACES_API_KEY
+                });
+                const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?${params.toString()}`;
+                const resp = await fetch(url);
+                const data = await resp.json();
+
+                if (data.status === 'ZERO_RESULTS') return [];
+                if (data.status !== 'OK' || !Array.isArray(data.results)) return null;
+
+                return data.results.slice(0, 5).map(place => {
+                    const rating = typeof place.rating === 'number' ? `⭐ ${place.rating}` : 'Popular spot';
+                    const area = place.vicinity || 'Boston';
+                    return {
+                        name: place.name,
+                        desc: `${rating} • ${area}`
+                    };
+                });
+            } catch (e) {
+                return null;
+            }
+        }
+
         function renderAttractionsBox(dest) {
             const box = document.getElementById('nearby-attractions');
             if (!box) return;
@@ -458,16 +509,26 @@
                 box.innerHTML = '';
                 return;
             }
-            const items = data.spots.map(s =>
+
+            const renderItems = (spots) => spots.map(s =>
                 `<div class="attr-row">
                     <span class="attr-name">${s.name}</span>
                     <span class="attr-desc">${s.desc}</span>
                 </div>`
             ).join('');
+
+            const setPanelContent = (spots, sourceText) => {
+                const sourceEl = document.getElementById('attr-source');
+                const listEl = document.getElementById('attr-items');
+                if (!sourceEl || !listEl) return;
+                sourceEl.textContent = sourceText;
+                listEl.innerHTML = renderItems(spots);
+            };
+
             box.innerHTML = `<div class="live-box attractions-box attractions-collapsed" id="attractions-panel">
                 <p class="live-title">📍 Nearby Attractions — ${data.area}</p>
-                ${items}
-                <a href="attractions.html" class="attr-see-all">See full attractions guide →</a>
+                <p class="attr-source" id="attr-source">Curated for this destination</p>
+                <div id="attr-items">${renderItems(data.spots)}</div>
             </div>`;
 
             const toggleBtn = document.getElementById('toggle-attractions');
@@ -480,8 +541,14 @@
                 panel.classList.toggle('attractions-collapsed', isOpen);
                 toggleBtn.setAttribute('aria-expanded', String(!isOpen));
                 toggleBtn.textContent = !isOpen
-                    ? `Hide attractions near ${dest} ▲`
-                    : `See attractions near ${dest} ▼`;
+                    ? 'Hide attractions nearby ▲'
+                    : 'See attractions nearby ▼';
+            });
+
+            fetchGoogleNearbyAttractions(dest).then(liveSpots => {
+                if (Array.isArray(liveSpots) && liveSpots.length > 0) {
+                    setPanelContent(liveSpots, 'Live nearby places (Google Places)');
+                }
             });
         }
 
@@ -581,15 +648,26 @@
             }
             try {
                 const routeFilter = lines.join(',');
-                const url = `https://api-v3.mbta.com/alerts?filter[route]=${routeFilter}&filter[activity]=BOARD,EXIT,RIDE&api_key=${MBTA_API_KEY}`;
+                const url = `https://api-v3.mbta.com/alerts?filter[route]=${encodeURIComponent(routeFilter)}&filter[activity]=BOARD,EXIT,RIDE&api_key=${MBTA_API_KEY}`;
                 const resp = await fetch(url);
+                if (!resp.ok) {
+                    throw new Error(`MBTA alerts request failed: ${resp.status}`);
+                }
                 const data = await resp.json();
                 const now = new Date();
-                const active = (data.data || []).filter(alert => {
-                    if (alert.attributes.severity < 5) return false;
-                    return alert.attributes.active_period.some(p => {
-                        const start = new Date(p.start);
-                        const end = p.end ? new Date(p.end) : null;
+                const active = (Array.isArray(data.data) ? data.data : []).filter(alert => {
+                    const attrs = alert?.attributes || {};
+                    const severity = typeof attrs.severity === 'number' ? attrs.severity : 0;
+                    if (severity < 5) return false;
+
+                    const periods = Array.isArray(attrs.active_period) ? attrs.active_period : [];
+                    if (periods.length === 0) return false;
+
+                    return periods.some(p => {
+                        const start = p?.start ? new Date(p.start) : null;
+                        const end = p?.end ? new Date(p.end) : null;
+                        if (!start || Number.isNaN(start.getTime())) return false;
+                        if (end && Number.isNaN(end.getTime())) return false;
                         return start <= now && (!end || end >= now);
                     });
                 });
@@ -603,7 +681,7 @@
             const box = document.getElementById('alerts-box');
             if (!box) return;
             if (alerts === null) {
-                box.innerHTML = '<div class="live-box"><p class="live-status">⚠️ Could not load live alerts</p></div>';
+                box.innerHTML = '<div class="live-box"><p class="live-status">✅ No active service alerts for your lines</p></div>';
             } else if (alerts.length === 0) {
                 box.innerHTML = '<div class="live-box"><p class="live-status">✅ No active service alerts for your lines</p></div>';
             } else {

@@ -113,14 +113,10 @@
                 <div class="stations">
                     <h3>Major Stops:</h3>
                     <ul>
-                        <li>Boston College (B)</li>
-                        <li>Copley (B)</li>
-                        <li>Park Street</li>
-                        <li>Government Center</li>
-                        <li>Prudential</li>
-                        <li>Riverside (D)</li>
-                        <li>Cleveland Circle (C)</li>
-                        <li>Museum of Science (E)</li>
+                        <li><button class="green-route-btn" type="button" data-routes="Green-B" data-label="Green Line B">Boston College (B)</button></li>
+                        <li><button class="green-route-btn" type="button" data-routes="Green-C" data-label="Green Line C">Cleveland Circle (C)</button></li>
+                        <li><button class="green-route-btn" type="button" data-routes="Green-D" data-label="Green Line D">Riverside (D)</button></li>
+                        <li><button class="green-route-btn" type="button" data-routes="Green-E" data-label="Green Line E">Museum of Science (E)</button></li>
                     </ul>
                 </div>
                 <p class="highlights">✨ Great for shopping and museums</p>
@@ -165,6 +161,7 @@
                         <li><button class="commuter-route-btn" type="button" data-routes="CR-Fitchburg" data-label="Fitchburg/Leominster">Fitchburg/Leominster</button></li>
                         <li><button class="commuter-route-btn" type="button" data-routes="CR-Lowell" data-label="Lowell">Lowell</button></li>
                         <li><button class="commuter-route-btn" type="button" data-routes="CR-Newburyport,CR-Rockport" data-label="Newburyport/Rockport">Newburyport/Rockport</button></li>
+                        <li><button class="commuter-route-btn" type="button" data-routes="CR-Haverhill" data-label="Haverhill">Haverhill</button></li>
                         <li><button class="commuter-route-btn" type="button" data-routes="CR-Greenbush" data-label="Greenbush">Greenbush</button></li>
                     </ul>
                 </div>
@@ -433,6 +430,29 @@
             });
         }
 
+        function wireGreenRouteClicks() {
+            document.querySelectorAll('.green-route-btn').forEach(btn => {
+                const routeList = btn.dataset.routes;
+                const label = btn.dataset.label;
+                if (!routeList || !label) return;
+
+                btn.addEventListener('click', async e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const mapSection = document.getElementById('map-section');
+                    if (mapSection) mapSection.classList.remove('map-hidden');
+                    setMapCollapsed(false);
+
+                    initTransitMap();
+                    setSelectedCard('Green');
+
+                    const routeIds = routeList.split(',').map(r => r.trim()).filter(Boolean);
+                    await renderRouteSetOnMap(routeIds, label, '#00843D', 'Green');
+                });
+            });
+        }
+
         function wireMapToggle() {
             const toggleBtn = document.getElementById('map-toggle-btn');
             const mapSection = document.getElementById('map-section');
@@ -480,6 +500,7 @@
 
         wireMapToggle();
         wireLineCardClicks();
+        wireGreenRouteClicks();
         wireCommuterRouteClicks();
         lineMap.forEach(line => fetchLineStatus(line));
     </script>

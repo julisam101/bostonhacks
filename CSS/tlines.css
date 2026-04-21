@@ -228,7 +228,8 @@ h1 {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.commuter-route-btn {
+.commuter-route-btn,
+.green-route-btn {
     width: 100%;
     text-align: left;
     background: rgba(255, 255, 255, 0.12);
@@ -242,7 +243,8 @@ h1 {
     transition: background 0.2s, transform 0.2s;
 }
 
-.commuter-route-btn:hover {
+.commuter-route-btn:hover,
+.green-route-btn:hover {
     background: rgba(255, 255, 255, 0.22);
     transform: translateX(2px);
 }

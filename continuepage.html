@@ -12,8 +12,6 @@
         <div id="routeBox" class="route-card">
             <p class="loading">Loading your route...</p>
         </div>
-
-        <div id="nearby-attractions"></div>
         <div id="departures-box"></div>
         <div id="alerts-box"></div>
 
@@ -305,15 +303,12 @@
                         <h2>Directions:</h2>
                         <p class="instruction">${route}</p>
                     </div>
-                    ${lookupCity !== city || lookupDest !== dest ? `<div class="tips"><p>📍 <strong>Nearby match used:</strong> ${lookupCity} → ${lookupDest}</p></div>` : ''}
-                    <div class="tips">
-                        <p>💡 <strong>Tip:</strong> Use a CharlieCard for convenient travel on all MBTA lines</p>
-                    </div>
                     <div class="route-actions">
-                        <button id="toggle-attractions" class="route-dropdown-btn" type="button" aria-expanded="false">
+                        <button id="toggle-attractions" class="route-dropdown-btn" type="button" aria-expanded="false" aria-controls="attractions-panel">
                             See attractions nearby ▼
                         </button>
                     </div>
+                    <div id="nearby-attractions"></div>
                 `;
 
                 // Fetch live MBTA alerts for the lines in this route
@@ -340,6 +335,7 @@
 
         const MBTA_API_KEY = 'c5d3ce45e5864cc3aafffd54a7add1e3';
         const GOOGLE_PLACES_API_KEY = '';
+        const TRIPADVISOR_API_KEY = '';
 
         const destinationCoords = {
             "North Station": { lat: 42.365577, lng: -71.061290 },
@@ -538,14 +534,67 @@
             }
         }
 
+        async function fetchTripadvisorAttractions(dest) {
+            if (!TRIPADVISOR_API_KEY) return null;
+            try {
+                const searchParams = new URLSearchParams({
+                    searchQuery: `${dest}, Boston`,
+                    category: 'attractions',
+                    language: 'en',
+                    key: TRIPADVISOR_API_KEY
+                });
+
+                const searchUrl = `https://api.content.tripadvisor.com/api/v1/location/search?${searchParams.toString()}`;
+                const searchResp = await fetch(searchUrl);
+                if (!searchResp.ok) return null;
+                const searchData = await searchResp.json();
+                const candidates = Array.isArray(searchData.data) ? searchData.data.slice(0, 5) : [];
+                if (!candidates.length) return [];
+
+                const details = await Promise.all(candidates.map(async c => {
+                    const id = c.location_id;
+                    if (!id) return null;
+                    const detailParams = new URLSearchParams({
+                        language: 'en',
+                        currency: 'USD',
+                        key: TRIPADVISOR_API_KEY
+                    });
+                    const detailUrl = `https://api.content.tripadvisor.com/api/v1/location/${id}/details?${detailParams.toString()}`;
+                    const detailResp = await fetch(detailUrl);
+                    if (!detailResp.ok) return null;
+                    const d = await detailResp.json();
+                    const ratingText = d.rating ? `⭐ ${d.rating}` : 'Popular spot';
+                    const addr = d.address_obj?.city ? `${d.address_obj.city}` : 'Boston';
+                    return {
+                        name: d.name || c.name,
+                        desc: `${ratingText} • ${addr}`
+                    };
+                }));
+
+                return details.filter(Boolean);
+            } catch (e) {
+                return null;
+            }
+        }
+
         function renderAttractionsBox(dest) {
             const box = document.getElementById('nearby-attractions');
             if (!box) return;
-            const data = destAttractions[dest];
-            if (!data) {
-                box.innerHTML = '';
-                return;
-            }
+            const data = destAttractions[dest] || {
+                area: dest || 'Boston',
+                spots: [
+                    { name: 'Boston Common', desc: 'Central park and major starting point for exploring the city' },
+                    { name: 'Faneuil Hall & Quincy Market', desc: 'Historic marketplace with food and shops' },
+                    { name: 'New England Aquarium', desc: 'Popular waterfront attraction with marine exhibits' }
+                ]
+            };
+            const fallbackSpots = Array.isArray(data.spots) && data.spots.length > 0
+                ? data.spots
+                : [
+                    { name: 'Boston Common', desc: 'Central park and major starting point for exploring the city' },
+                    { name: 'Faneuil Hall & Quincy Market', desc: 'Historic marketplace with food and shops' },
+                    { name: 'New England Aquarium', desc: 'Popular waterfront attraction with marine exhibits' }
+                ];
 
             const renderItems = (spots) => spots.map(s =>
                 `<div class="attr-row">
@@ -562,10 +611,10 @@
                 listEl.innerHTML = renderItems(spots);
             };
 
-            box.innerHTML = `<div class="live-box attractions-box attractions-collapsed" id="attractions-panel">
+            box.innerHTML = `<div class="live-box attractions-box" id="attractions-panel" hidden>
                 <p class="live-title">📍 Nearby Attractions — ${data.area}</p>
                 <p class="attr-source" id="attr-source">Curated for this destination</p>
-                <div id="attr-items">${renderItems(data.spots)}</div>
+                <div id="attr-items">${renderItems(fallbackSpots)}</div>
             </div>`;
 
             const toggleBtn = document.getElementById('toggle-attractions');
@@ -573,19 +622,25 @@
             if (!toggleBtn || !panel) return;
 
             toggleBtn.addEventListener('click', () => {
-                const isOpen = panel.classList.contains('attractions-open');
-                panel.classList.toggle('attractions-open', !isOpen);
-                panel.classList.toggle('attractions-collapsed', isOpen);
-                toggleBtn.setAttribute('aria-expanded', String(!isOpen));
-                toggleBtn.textContent = !isOpen
+                const opening = panel.hidden;
+                panel.hidden = !opening;
+                toggleBtn.setAttribute('aria-expanded', String(opening));
+                toggleBtn.textContent = opening
                     ? 'Hide attractions nearby ▲'
                     : 'See attractions nearby ▼';
             });
 
-            fetchGoogleNearbyAttractions(dest).then(liveSpots => {
-                if (Array.isArray(liveSpots) && liveSpots.length > 0) {
-                    setPanelContent(liveSpots, 'Live nearby places (Google Places)');
+            fetchTripadvisorAttractions(dest).then(tripSpots => {
+                if (Array.isArray(tripSpots) && tripSpots.length > 0) {
+                    setPanelContent(tripSpots, 'Live nearby places (TripAdvisor)');
+                    return;
                 }
+
+                fetchGoogleNearbyAttractions(dest).then(liveSpots => {
+                    if (Array.isArray(liveSpots) && liveSpots.length > 0) {
+                        setPanelContent(liveSpots, 'Live nearby places (Google Places)');
+                    }
+                });
             });
         }
 

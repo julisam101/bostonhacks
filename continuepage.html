@@ -29,6 +29,40 @@
         const city = params.get("city");
         const dest = params.get("dest");
 
+        const originAliases = {
+            "North Station": "North End",
+            "South Station": "Downtown",
+            "Logan Airport": "Seaport",
+            "Harvard Square": "Cambridge",
+            "MIT Campus": "Cambridge",
+            "Boston Common": "Downtown",
+            "Public Garden": "Beacon Hill",
+            "Fenway Park": "Fenway",
+            "Museum of Fine Arts": "Fenway",
+            "Boston Children's Museum": "Seaport",
+            "New England Aquarium": "North End",
+            "Newbury Street": "Back Bay",
+            "Boston Public Library": "Back Bay",
+            "TD Garden": "North End",
+            "Freedom Trail": "Downtown",
+            "Charles River Esplanade": "Beacon Hill"
+        };
+
+        const destinationAliases = {
+            "Downtown": "Boston Common",
+            "Beacon Hill": "Public Garden",
+            "North End": "Freedom Trail",
+            "Back Bay": "Newbury Street",
+            "Fenway": "Fenway Park",
+            "South End": "Boston Public Library",
+            "Seaport": "Boston Children's Museum",
+            "Cambridge": "Harvard Square",
+            "Charlestown": "TD Garden",
+            "Allston": "Fenway Park",
+            "Brighton": "Fenway Park",
+            "Chinatown": "Freedom Trail"
+        };
+
         // Comprehensive routing database
         const routes = {
             "Downtown": {
@@ -249,7 +283,9 @@
         };
 
         if (city && dest) {
-            const route = routes[city]?.[dest] || null;
+            const lookupCity = routes[city] ? city : (originAliases[city] || city);
+            const lookupDest = (routes[lookupCity] && routes[lookupCity][dest]) ? dest : (destinationAliases[dest] || dest);
+            const route = routes[lookupCity]?.[lookupDest] || null;
             
             if (route) {
                 document.getElementById("routeBox").innerHTML = `
@@ -269,6 +305,7 @@
                         <h2>Directions:</h2>
                         <p class="instruction">${route}</p>
                     </div>
+                    ${lookupCity !== city || lookupDest !== dest ? `<div class="tips"><p>📍 <strong>Nearby match used:</strong> ${lookupCity} → ${lookupDest}</p></div>` : ''}
                     <div class="tips">
                         <p>💡 <strong>Tip:</strong> Use a CharlieCard for convenient travel on all MBTA lines</p>
                     </div>
@@ -282,9 +319,9 @@
                 // Fetch live MBTA alerts for the lines in this route
                 fetchAlertsForRoute(route);
                 // Fetch next departures from nearest stop
-                fetchPredictions(city);
+                fetchPredictions(lookupCity);
                 // Show attractions near the destination
-                renderAttractionsBox(dest);
+                renderAttractionsBox(lookupDest);
             } else {
                 document.getElementById("routeBox").innerHTML = `
                     <h1>Route Not Found</h1>

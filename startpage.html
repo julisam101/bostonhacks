@@ -15,7 +15,7 @@
             <div class="input-group">
                 <label for="cityDropdown">Where Are You Now?</label>
                 <div class="dropdown">
-                    <button class="dropdown-btn">Choose location ▾</button>
+                    <button class="dropdown-btn" id="cityBtn">Choose location ▾</button>
                     <div class="dropdown-content" id="cityDropdown">
                         <a href="#">Downtown</a>
                         <a href="#">Beacon Hill</a>
@@ -38,7 +38,7 @@
             <div class="input-group">
                 <label for="destDropdown">Where Are You Going?</label>
                 <div class="dropdown">
-                    <button class="dropdown-btn">Choose destination ▾</button>
+                    <button class="dropdown-btn" id="destBtn">Choose destination ▾</button>
                     <div class="dropdown-content" id="destDropdown">
                         <a href="#">North Station</a>
                         <a href="#">South Station</a>
@@ -61,6 +61,16 @@
             </div>
         </div>
 
+        <div class="journey-preview" id="journeyPreview" aria-live="polite">
+            <p class="preview-label">Trip Preview</p>
+            <div class="preview-row">
+                <span class="preview-pill" id="fromPill">From: Choose location</span>
+                <span class="preview-arrow">→</span>
+                <span class="preview-pill" id="toPill">To: Choose destination</span>
+            </div>
+            <p class="preview-status" id="previewStatus">Pick your starting location to begin.</p>
+        </div>
+
         <button class="continue-box" id="continueBtn">Find My Route!</button>
 
         <div class="links-section">
@@ -72,6 +82,80 @@
     <script>
         let selectedCity = "";
         let selectedDestination = "";
+        const fromPill = document.getElementById("fromPill");
+        const toPill = document.getElementById("toPill");
+        const previewStatus = document.getElementById("previewStatus");
+        const continueBtn = document.getElementById("continueBtn");
+        const cityBtn = document.getElementById("cityBtn");
+        const destBtn = document.getElementById("destBtn");
+        const sharedOptions = [
+            "Downtown", "Beacon Hill", "North End", "Back Bay", "Fenway", "South End",
+            "Seaport", "Cambridge", "Charlestown", "Allston", "Brighton", "Chinatown",
+            "North Station", "South Station", "Logan Airport", "Harvard Square", "MIT Campus",
+            "Boston Common", "Public Garden", "Fenway Park", "Museum of Fine Arts",
+            "Boston Children's Museum", "New England Aquarium", "Newbury Street",
+            "Boston Public Library", "TD Garden", "Freedom Trail", "Charles River Esplanade"
+        ];
+
+        function hydrateDropdownOptions() {
+            const cityDropdown = document.getElementById('cityDropdown');
+            const destDropdown = document.getElementById('destDropdown');
+            if (!cityDropdown || !destDropdown) return;
+
+            const links = sharedOptions
+                .map(option => `<a href="#">${option}</a>`)
+                .join('');
+
+            cityDropdown.innerHTML = links;
+            destDropdown.innerHTML = links;
+        }
+
+        hydrateDropdownOptions();
+
+        function filterMatchingOptions() {
+            const cityLinks = document.querySelectorAll('#cityDropdown a');
+            const destLinks = document.querySelectorAll('#destDropdown a');
+
+            cityLinks.forEach(link => {
+                const text = link.textContent.trim();
+                link.style.display = selectedDestination && text === selectedDestination ? 'none' : 'block';
+            });
+
+            destLinks.forEach(link => {
+                const text = link.textContent.trim();
+                link.style.display = selectedCity && text === selectedCity ? 'none' : 'block';
+            });
+
+            if (selectedCity && selectedCity === selectedDestination) {
+                selectedDestination = "";
+                destBtn.textContent = 'Choose destination ▾';
+                destBtn.classList.remove('is-picked');
+            }
+
+            updateJourneyPreview();
+        }
+
+        function updateJourneyPreview() {
+            fromPill.textContent = selectedCity ? `From: ${selectedCity}` : "From: Choose location";
+            toPill.textContent = selectedDestination ? `To: ${selectedDestination}` : "To: Choose destination";
+
+            fromPill.classList.toggle("is-selected", Boolean(selectedCity));
+            toPill.classList.toggle("is-selected", Boolean(selectedDestination));
+
+            if (!selectedCity && !selectedDestination) {
+                previewStatus.textContent = "Pick your starting location to begin.";
+                continueBtn.classList.remove("is-ready");
+            } else if (selectedCity && !selectedDestination) {
+                previewStatus.textContent = "Nice start. Now pick where you are going.";
+                continueBtn.classList.remove("is-ready");
+            } else if (!selectedCity && selectedDestination) {
+                previewStatus.textContent = "Great destination. Add your current location.";
+                continueBtn.classList.remove("is-ready");
+            } else {
+                previewStatus.textContent = "Route ready! Hit Find My Route.";
+                continueBtn.classList.add("is-ready");
+            }
+        }
 
         // Generic dropdown handler for any .dropdown element
         document.querySelectorAll('.dropdown').forEach(function(drop) {
@@ -91,7 +175,9 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const text = this.textContent.trim();
+                    if (this.style.display === 'none') return;
                     btn.textContent = text + ' ▾';
+                    btn.classList.add('is-picked');
                     content.classList.remove('show');
 
                     // Track which dropdown was selected
@@ -100,6 +186,8 @@
                     } else if (content.id === "destDropdown") {
                         selectedDestination = text;
                     }
+
+                    filterMatchingOptions();
                 });
             });
         });
@@ -112,7 +200,7 @@
         });
 
         // Continue button logic
-        document.getElementById("continueBtn").addEventListener("click", function() {
+        continueBtn.addEventListener("click", function() {
             if (selectedCity && selectedDestination) {
                 const url = `continuepage.html?city=${encodeURIComponent(selectedCity)}&dest=${encodeURIComponent(selectedDestination)}`;
                 window.location.href = url;
@@ -120,6 +208,8 @@
                 alert("Please select both a current location and a destination.");
             }
         });
+
+        filterMatchingOptions();
     </script>
 </body>
 </html>

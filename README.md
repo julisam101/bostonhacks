@@ -1,6 +1,6 @@
 ## Boston Hacks 
 
-- This websiite allows users to quickly find the best route between two locations in Boston using public transportation. By entering a starting point and destination, the tool calculates an optimal route using MBTA options such as commuter rails and subway lines. It's designed to make navigating Boston simple, especially for students, visitors, and commuters who want fast, clear directions. 
+- This website allows users to quickly find the best route between two locations in Boston using public transportation. By entering a starting point and destination, the tool calculates an optimal route using MBTA options such as commuter rails and subway lines. It's designed to make navigating Boston simple, especially for students, visitors, and commuters who want fast, clear directions. 
 
 - How to Use It: 
     - Enter your starting location

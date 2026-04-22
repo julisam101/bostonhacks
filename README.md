@@ -10,7 +10,7 @@
     - One can also explore the interactive transit map, which provides a high-level overview of all the MBTA subway lines and commuter rail routes. 
     - Use the map to see where each line travels, the stops along the way, and how the different routes connect across the city
 
-- Link to Live Site: 
+- Link to Live Site: https://julisam101.github.io/bostonhacks/
 
 - What I Learned: 
     - How to use conditional logic (if/else statements) to generate different route results based on user input 

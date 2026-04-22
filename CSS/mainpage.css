@@ -1,5 +1,6 @@
 body {
-    background-color: #007A33;
+    background-color: #006b2c;
+    background-image: radial-gradient(ellipse at 60% 40%, #007A33 0%, #004f1e 100%);
     font-family: 'League Spartan', sans-serif;
     font-size: 16px;
     text-align: center;
@@ -12,23 +13,59 @@ body {
     gap: 24px;
     box-sizing: border-box;
     padding: 40px 24px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ── Faint Boston map background ── */
+.map-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.13;
+    width: 100%;
+    height: 100%;
+    /* taken fully out of flex flow */
+    flex: none;
+    align-self: auto;
+}
+
+.map-bg svg {
+    width: 100%;
+    height: 100%;
+}
+
+h1, h2, p, .nav-container, .info-section {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 4px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(255, 215, 0, 0.55); }
+    50%       { box-shadow: 0 4px 18px rgba(0,0,0,0.25), 0 0 0 14px rgba(255, 215, 0, 0); }
 }
 
 h1 {
-    font-size: clamp(34px, 7vw, 48px);
-    margin: 20px 0;
+    font-size: clamp(38px, 8vw, 56px);
+    margin: 0 0 4px 0;
     font-weight: 900;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.3);
 }
 
 h2 {
-    font-size: clamp(24px, 4.8vw, 32px);
-    margin: 10px 0;
-    font-weight: 700;
+    font-size: clamp(18px, 3.6vw, 24px);
+    margin: 0 0 4px 0;
+    font-weight: 600;
+    opacity: 0.88;
 }
 
 p {
-    font-size: clamp(16px, 2.8vw, 18px);
-    margin: 8px 0;
+    font-size: clamp(15px, 2.6vw, 18px);
+    margin: 0;
+    opacity: 0.75;
+    font-style: italic;
 }
 
 h1,
@@ -57,35 +94,53 @@ p,
     display: block;
     width: 100%;
     padding: 18px 36px;
-    background: white;
-    color: #007A33;
     font-weight: 800;
     border-radius: 10px;
     text-decoration: none;
     cursor: pointer;
     text-align: center;
-    font-size: 16px;
+    font-size: 17px;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.start-box:hover, .nav-box:hover {
+.start-box {
+    background: #FFD700;
+    color: #004a1a;
+    animation: glow-pulse 2.8s ease-in-out infinite;
+}
+
+.nav-box {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.35);
+}
+
+.start-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+    animation: none;
+}
+
+.nav-box:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background: rgba(255,255,255,0.22);
 }
 
 .info-section {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border-radius: 14px;
     width: 90%;
-    max-width: 450px;
+    max-width: 680px;
     box-sizing: border-box;
-    padding: 24px 22px;
-    margin: 16px auto 0 auto;
+    padding: 24px 28px;
+    margin: 16px auto;
     display: grid;
     gap: 14px;
     text-align: center;
-    align-self: auto;
 }
 
 .info-section h3 {
@@ -109,8 +164,9 @@ p,
     line-height: 1.45;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 10px 16px;
     text-align: center;
+    white-space: nowrap;
 }
 
 @media (max-width: 768px) {

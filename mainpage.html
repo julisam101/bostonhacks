@@ -8,21 +8,95 @@
 </head>
 
 <body>
-    <h1>🏀 Welcome to Boston 🏀</h1>
-    <h2>Your Guide to the MBTA T</h2>
-    <p>Lost in Boston? Let us help you navigate the city!</p>
+
+    <div class="map-bg" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice">
+            <!-- Charles River -->
+            <path d="M0,145 C80,120 160,112 260,118 C340,123 400,115 480,108 C570,100 660,105 780,118 C840,124 880,130 900,132"
+                  fill="none" stroke="white" stroke-width="18" stroke-linecap="round"/>
+            <!-- Harbor coastline -->
+            <path d="M755,95 C788,158 800,240 792,318 C782,392 766,450 746,508 C726,558 702,585 678,600"
+                  fill="none" stroke="white" stroke-width="14" stroke-linecap="round"/>
+            <!-- Fort Point Channel -->
+            <path d="M638,442 C658,464 678,492 698,532"
+                  fill="none" stroke="white" stroke-width="7"/>
+            <!-- Storrow Drive along river -->
+            <path d="M30,162 C140,148 260,145 382,150 C462,154 524,155 584,152"
+                  fill="none" stroke="white" stroke-width="2"/>
+            <!-- Commonwealth Ave -->
+            <path d="M0,255 C120,242 260,248 400,258 C500,265 600,272 720,280"
+                  fill="none" stroke="white" stroke-width="2"/>
+            <!-- Boylston St -->
+            <path d="M60,295 C200,280 380,285 520,290 C640,294 740,298 860,302"
+                  fill="none" stroke="white" stroke-width="2.5"/>
+            <!-- Tremont St -->
+            <path d="M140,340 C260,328 400,332 520,340 C620,347 700,355 800,360"
+                  fill="none" stroke="white" stroke-width="2"/>
+            <!-- Atlantic Ave -->
+            <path d="M622,178 C652,242 662,312 657,382 C652,432 642,472 630,512"
+                  fill="none" stroke="white" stroke-width="2"/>
+            <!-- Mass Ave -->
+            <path d="M418,130 C420,220 422,320 424,420 C426,490 428,542 430,592"
+                  fill="none" stroke="white" stroke-width="2"/>
+            <!-- Secondary cross streets -->
+            <path d="M200,260 C218,240 228,302 218,362" fill="none" stroke="white" stroke-width="1.2" opacity="0.55"/>
+            <path d="M280,242 C288,292 292,352 288,412" fill="none" stroke="white" stroke-width="1.2" opacity="0.55"/>
+            <path d="M342,230 C346,292 348,362 344,422" fill="none" stroke="white" stroke-width="1.2" opacity="0.55"/>
+            <path d="M490,258 C492,312 494,372 492,432" fill="none" stroke="white" stroke-width="1.2" opacity="0.55"/>
+            <path d="M558,268 C560,322 562,382 558,442" fill="none" stroke="white" stroke-width="1.2" opacity="0.55"/>
+            <path d="M160,312 C280,306 382,310 482,314" fill="none" stroke="white" stroke-width="1.2" opacity="0.55"/>
+            <path d="M180,372 C300,366 402,370 502,374" fill="none" stroke="white" stroke-width="1.2" opacity="0.55"/>
+            <path d="M198,422 C308,418 402,422 502,426" fill="none" stroke="white" stroke-width="1.2" opacity="0.55"/>
+            <!-- Red Line -->
+            <path d="M420,592 C418,502 415,420 410,350 C406,290 402,240 398,180 C396,160 390,140 382,128"
+                  fill="none" stroke="#FF4444" stroke-width="5" stroke-linecap="round"/>
+            <!-- Orange Line -->
+            <path d="M320,592 C322,502 326,422 330,350 C334,280 338,220 342,158 C344,138 346,128 348,118"
+                  fill="none" stroke="#FF8C00" stroke-width="5" stroke-linecap="round"/>
+            <!-- Green Line -->
+            <path d="M0,308 C100,298 200,292 332,296 C392,298 422,298 482,300 C562,302 642,305 752,310"
+                  fill="none" stroke="#22DD66" stroke-width="5" stroke-linecap="round"/>
+            <!-- Green Line B branch -->
+            <path d="M202,294 C162,268 102,248 42,238"
+                  fill="none" stroke="#22DD66" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- Blue Line -->
+            <path d="M390,256 C450,258 522,265 602,276 C662,284 722,290 802,292"
+                  fill="none" stroke="#4488FF" stroke-width="5" stroke-linecap="round"/>
+            <!-- Silver Line -->
+            <path d="M412,372 C448,380 510,388 580,395 C630,400 680,405 740,408"
+                  fill="none" stroke="#AAAAAA" stroke-width="3.5" stroke-dasharray="8,5" stroke-linecap="round"/>
+            <!-- Station dots -->
+            <circle cx="396" cy="296" r="7" fill="white"/>
+            <circle cx="396" cy="296" r="3.5" fill="#007A33"/>
+            <circle cx="492" cy="288" r="6" fill="white"/>
+            <circle cx="492" cy="288" r="3" fill="#007A33"/>
+            <circle cx="346" cy="174" r="6" fill="white"/>
+            <circle cx="346" cy="174" r="3" fill="#007A33"/>
+            <circle cx="416" cy="372" r="6" fill="white"/>
+            <circle cx="416" cy="372" r="3" fill="#007A33"/>
+            <circle cx="382" cy="292" r="5" fill="white" opacity="0.85"/>
+            <circle cx="292" cy="138" r="5" fill="white" opacity="0.85"/>
+            <circle cx="624" cy="278" r="5" fill="white" opacity="0.85"/>
+            <circle cx="542" cy="294" r="4" fill="white" opacity="0.75"/>
+            <circle cx="448" cy="300" r="4" fill="white" opacity="0.75"/>
+        </svg>
+    </div>
+
+    <h1>Navigate Boston</h1>
+    <h2>Your MBTA Guide to the City</h2>
+    <p>Hop on. We'll get you there.</p>
 
     <div class="nav-container">
-        <a href="startpage.html" class="start-box">Find a Route</a>
-        <a href="tlines.html" class="nav-box">View T Lines</a>
+        <a href="startpage.html" class="start-box">🗺️ Plan My Route</a>
+        <a href="tlines.html" class="nav-box">View T Lines &amp; Map</a>
     </div>
 
     <div class="info-section">
         <h3>Quick Tips</h3>
         <ul class="tips-list">
-            <li>🚇 The MBTA operates 4 main colored lines: Red, Blue, Orange, and Green</li>
+            <li>🚇 The MBTA runs 4 colored lines: Red, Blue, Orange, and Green</li>
             <li>💳 Get a CharlieCard for convenient travel across all lines</li>
-            <li>🗺️ Select your current location and destination to see your route</li>
+            <li>📍 Pick your start and destination to get step-by-step directions</li>
         </ul>
     </div>
 </body>

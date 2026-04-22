@@ -64,274 +64,221 @@
         // Comprehensive routing database
         const routes = {
             "Downtown": {
-                "North Station": "🚇 You're already close! Walk to North Station (5-10 min) or take Orange Line from Downtown Crossing",
-                "South Station": "Walk to Downtown Crossing → Red Line South to South Station (5-8 min)",
-                "Logan Airport": "Walk to Downtown Crossing → Blue Line to Airport (15-20 min)",
-                "Harvard Square": "Red Line from Downtown Crossing → Continue to Harvard Square (20-25 min)",
-                "MIT Campus": "Red Line from Downtown Crossing → Get off at Kendall/MIT (15-20 min)",
-                "Boston Common": "Walk north from Downtown Crossing (10-15 min)",
-                "Public Garden": "Walk north from Downtown Crossing near Park Street (10-15 min)",
-                "Fenway Park": "Orange Line to Back Bay → Green Line to Kenmore (20-25 min)",
-                "Museum of Fine Arts": "Orange Line to Back Bay → Walk or bus (20 min)",
-                "Boston Children's Museum": "Walk to Seaport area (15 min) or take Silver Line",
-                "New England Aquarium": "Walk to waterfront at Blue Line Aquarium Station (10-15 min)",
-                "Newbury Street": "Orange Line to Back Bay (10 min)",
-                "Boston Public Library": "Orange Line to Back Bay → Walk to Copley (12 min)",
-                "TD Garden": "Orange Line North to North Station (10 min)",
-                "Freedom Trail": "Walk and explore - Trail starts at Boston Common (nearby)",
-                "Charles River Esplanade": "Walk to Red Line at Downtown Crossing → Charles/MGH → walk to Esplanade (15 min)"
+                "North Station": "Board Orange Line northbound at Downtown Crossing → exit North Station (2 stops, 8 min). Walk up to Causeway St — TD Garden is directly above.",
+                "South Station": "Board Red Line southbound at Downtown Crossing → exit South Station (1 stop, 5 min). Exit to Summer St for the main terminal entrance.",
+                "Logan Airport": "Walk to State St (5 min) → board Blue Line eastbound → ride 4 stops to Airport station → take free Massport shuttle to your terminal (20 min total).",
+                "Harvard Square": "Board Red Line outbound (Alewife) at Downtown Crossing → ride 7 stops to Harvard station (22 min) → exit to Harvard Square plaza via the main entrance.",
+                "MIT Campus": "Board Red Line outbound (Alewife) at Downtown Crossing → exit Kendall/MIT station (5 stops, 18 min) → walk west along Main St 5 min to the main campus entrance.",
+                "Boston Common": "Walk west on Winter St or Tremont St from Downtown Crossing → enter Boston Common at the Tremont St visitors entrance (8 min).",
+                "Public Garden": "Walk west on Winter St → cross through Boston Common → exit at Charles St gate into the Public Garden (12 min). Swan boats are at the center pond.",
+                "Fenway Park": "Board Orange Line outbound at Downtown Crossing → exit Back Bay station → cross to Green Line D outbound platform → exit Kenmore station → walk 5 min on Brookline Ave to Gate A (22 min total).",
+                "Museum of Fine Arts": "Board Orange Line outbound at Downtown Crossing → exit Back Bay → board Green Line E outbound → exit Museum of Fine Arts stop, walk across Huntington Ave (20 min total).",
+                "Boston Children's Museum": "Walk south to South Station (5 min) → board Silver Line SL2 outbound → exit Courthouse station → walk 3 min along Congress St to Museum Wharf (15 min total).",
+                "New England Aquarium": "Walk east on State St toward the waterfront → follow signs to Aquarium Blue Line station → exit Central Wharf, aquarium is directly ahead (12 min).",
+                "Newbury Street": "Board Orange Line outbound at Downtown Crossing → exit Back Bay station → walk north 2 blocks on Dartmouth St to Newbury St (12 min). Start at the Dartmouth end for galleries.",
+                "Boston Public Library": "Board Orange Line outbound at Downtown Crossing → exit Back Bay station → walk 4 min along Boylston St to Copley Square. Main entrance faces the square (14 min total).",
+                "TD Garden": "Board Orange Line northbound at Downtown Crossing → exit North Station (2 stops, 8 min). TD Garden is connected to the station — follow arena signs inside.",
+                "Freedom Trail": "Walk west to Boston Common (8 min) → pick up the red brick trail at the Freedom Trail Visitor Center on Tremont St. Trail runs 2.4 miles to Bunker Hill.",
+                "Charles River Esplanade": "Board Red Line inbound at Downtown Crossing → exit Charles/MGH station → walk 5 min over the footbridge at Storrow Dr to reach the Esplanade (15 min total)."
             },
             "Beacon Hill": {
-                "North Station": "Red Line from Charles/MGH to North Station (5 min)",
-                "South Station": "Red Line to Downtown Crossing → Continue South (8 min)",
-                "Logan Airport": "Red Line from Charles/MGH → Blue Line at Government Center → Airport Line (25 min)",
-                "Harvard Square": "Red Line from Charles/MGH → Continue to Harvard (15 min)",
-                "MIT Campus": "Red Line from Charles/MGH to Kendall/MIT (12 min)",
-                "Boston Common": "Walk down hill to Boston Common (5-10 min)",
-                "Public Garden": "Walk to Public Garden (5 min)",
-                "Fenway Park": "Red Line to Downtown Crossing → Orange Line to Back Bay → Green Line to Kenmore (25 min)",
-                "Museum of Fine Arts": "Red Line to Downtown Crossing → Orange Line to Back Bay (25 min)",
-                "Boston Children's Museum": "Red Line to South Station → Walk or Silver Line (20 min)",
-                "New England Aquarium": "Red Line from Charles/MGH to Downtown Crossing → Walk to waterfront (10 min)",
-                "Newbury Street": "Walk to Charles Street area (10 min) or Red Line to Back Bay",
-                "Boston Public Library": "Red Line from Charles/MGH to Back Bay → Walk to Copley (20 min)",
-                "TD Garden": "Red Line from Charles/MGH to North Station (8 min)",
-                "Freedom Trail": "Walk to Boston Common - Trail guide available",
-                "Charles River Esplanade": "Walk to the Esplanade along the river (5-10 min)"
+                "North Station": "Board Green Line inbound at Charles/MGH → exit North Station (2 stops, 6 min). Walk up to Causeway St for the arena entrance.",
+                "South Station": "Board Red Line inbound at Charles/MGH → exit South Station (3 stops via Park St, 12 min). Exit to Summer St.",
+                "Logan Airport": "Board Red Line inbound at Charles/MGH → exit Government Center (transfer) → board Blue Line eastbound → ride 4 stops to Airport station → take free shuttle to terminal (28 min total).",
+                "Harvard Square": "Board Red Line outbound at Charles/MGH → ride 6 stops to Harvard station (18 min) → exit to Harvard Square plaza.",
+                "MIT Campus": "Board Red Line outbound at Charles/MGH → exit Kendall/MIT (4 stops, 14 min) → walk west along Main St 5 min to campus.",
+                "Boston Common": "Walk south down the hill on Beacon St or Park St — enter Boston Common from the Beacon St or Tremont St side (5 min).",
+                "Public Garden": "Walk south on Charles St → enter the Public Garden from the Charles St gate at the corner of Beacon St (5 min). Swan boats are at the center pond.",
+                "Fenway Park": "Board Red Line inbound at Charles/MGH → exit Park St → board Green Line C/D outbound → exit Kenmore station → walk 5 min on Brookline Ave to Gate A (25 min total).",
+                "Museum of Fine Arts": "Board Red Line inbound at Charles/MGH → exit Park St → board Green Line E outbound → exit Museum of Fine Arts stop, cross Huntington Ave (25 min total).",
+                "Boston Children's Museum": "Board Red Line inbound at Charles/MGH → exit South Station (3 stops, 12 min) → board Silver Line SL2 → exit Courthouse → walk to Museum Wharf on Congress St (20 min total).",
+                "New England Aquarium": "Board Red Line inbound at Charles/MGH → exit Downtown Crossing → walk east 8 min on State St toward the waterfront to Central Wharf (18 min total).",
+                "Newbury Street": "Walk south on Charles St to Back Bay (15 min) or board Red Line inbound → exit Back Bay station → walk north on Dartmouth St to Newbury St (18 min total).",
+                "Boston Public Library": "Board Red Line inbound at Charles/MGH → exit Back Bay station (3 stops, 12 min) → walk 4 min along Boylston St to Copley Square (16 min total).",
+                "TD Garden": "Board Green Line inbound at Charles/MGH → exit North Station (2 stops, 6 min). TD Garden is connected to the station.",
+                "Freedom Trail": "Walk south to Boston Common (5 min) → pick up the red brick trail at the Visitor Center on Tremont St. Trail begins at the Common.",
+                "Charles River Esplanade": "Walk north on Charles St then turn left onto Storrow Dr pedestrian path → enter the Esplanade at the Dartmouth St footbridge (8 min)."
             },
             "North End": {
-                "North Station": "Green Line from Haymarket to North Station (2 min) or walk (10 min)",
-                "South Station": "Orange Line from Haymarket to South Station (8 min)",
-                "Logan Airport": "Blue Line from Aquarium to Airport (15 min)",
-                "Harvard Square": "Green Line to Downtown Crossing → Red Line to Harvard (20 min)",
-                "MIT Campus": "Orange Line from Haymarket to Downtown Crossing → Red Line to Kendall (15 min)",
-                "Boston Common": "Walk to Boston Common via downtown (15 min)",
-                "Public Garden": "Walk north to Public Garden (15 min)",
-                "Fenway Park": "Orange Line from Haymarket to Back Bay → Green Line to Kenmore (25 min)",
-                "Museum of Fine Arts": "Orange Line from Haymarket to Back Bay (20 min)",
-                "Boston Children's Museum": "Walk to waterfront near Seaport (20 min) or take Silver Line from South Station",
-                "New England Aquarium": "Walk to Aquarium station area (10 min)",
-                "Newbury Street": "Orange Line from Haymarket to Back Bay (15 min)",
-                "Boston Public Library": "Orange Line from Haymarket to Back Bay → Walk (20 min)",
-                "TD Garden": "Green Line from Haymarket to North Station (5 min)",
-                "Freedom Trail": "Start your Freedom Trail exploration here!",
-                "Charles River Esplanade": "Walk west to the Esplanade (15 min) or take Orange Line to Charles/MGH"
+                "North Station": "Walk west along Causeway St or Valenti Way from the North End — North Station entrance on Causeway St (10 min). Or board Green Line at Haymarket → 1 stop (4 min).",
+                "South Station": "Board Orange Line southbound at Haymarket → exit Downtown Crossing → transfer to Red Line southbound → exit South Station (3 stops total, 14 min).",
+                "Logan Airport": "Walk to Aquarium Blue Line station on State St (10 min) → board Blue Line eastbound → ride to Airport station → free shuttle to terminals (20 min total).",
+                "Harvard Square": "Board Orange Line inbound at Haymarket → exit Downtown Crossing → board Red Line outbound (Alewife) → ride to Harvard station (7 stops, 28 min total).",
+                "MIT Campus": "Board Orange Line inbound at Haymarket → exit Downtown Crossing → board Red Line outbound → exit Kendall/MIT (5 stops, 22 min total) → walk west on Main St 5 min.",
+                "Boston Common": "Walk south along Hanover St → cross the Rose Kennedy Greenway → continue on Congress St to the Common (15 min). The Freedom Trail runs this route.",
+                "Public Garden": "Walk south across downtown via Congress St and Winter St → enter the Public Garden from the Arlington St or Charles St gate (18 min).",
+                "Fenway Park": "Board Orange Line at Haymarket → exit Back Bay (5 stops, 12 min) → cross to Green Line D outbound platform → exit Kenmore → walk 5 min on Brookline Ave (22 min total).",
+                "Museum of Fine Arts": "Board Orange Line at Haymarket → exit Back Bay → board Green Line E outbound → exit Museum of Fine Arts stop, cross Huntington Ave (22 min total).",
+                "Boston Children's Museum": "Board Orange Line at Haymarket → exit South Station → board Silver Line SL2 → exit Courthouse → walk to Museum Wharf on Congress St (20 min total).",
+                "New England Aquarium": "Walk south on Commercial St or Richmond St to the waterfront — New England Aquarium is at Central Wharf on Atlantic Ave (10 min).",
+                "Newbury Street": "Board Orange Line at Haymarket → exit Back Bay station → walk north on Dartmouth St to Newbury St (16 min total).",
+                "Boston Public Library": "Board Orange Line at Haymarket → exit Back Bay station → walk 4 min along Boylston St to Copley Square (18 min total).",
+                "TD Garden": "Board Green Line inbound at Haymarket → exit North Station (1 stop, 4 min). Or walk along Causeway St (10 min).",
+                "Freedom Trail": "You're already on it! The Freedom Trail runs directly through the North End — follow the red brick path to Paul Revere House and Old North Church nearby.",
+                "Charles River Esplanade": "Board Orange Line at Haymarket → exit Charles/MGH (2 stops, 8 min) → walk across the Storrow Dr footbridge to the Esplanade (14 min total)."
             },
             "Back Bay": {
-                "North Station": "Orange Line to Downtown Crossing → Green Line or walk (15 min)",
-                "South Station": "Orange Line to South Station (10 min)",
-                "Logan Airport": "Orange Line to Downtown Crossing → Blue Line to Airport (25 min)",
-                "Harvard Square": "Orange Line to Downtown Crossing → Red Line to Harvard (20 min)",
-                "MIT Campus": "Orange Line to Downtown Crossing → Red Line to Kendall (15 min)",
-                "Boston Common": "Walk or Green Line from Copley (10 min)",
-                "Public Garden": "Walk from Copley area (5-10 min)",
-                "Fenway Park": "Green Line from Copley to Kenmore (5 min) or walk (15 min)",
-                "Museum of Fine Arts": "Green Line from Copley → Walk or continuing travel (10 min)",
-                "Boston Children's Museum": "Orange Line to South Station → walk (20 min)",
-                "New England Aquarium": "Orange Line to Downtown Crossing → Walk (15 min)",
-                "Newbury Street": "Walk Newbury Street - Great shopping area (nearby)",
-                "Boston Public Library": "Walk to Copley Square - Right next to you! (5 min)",
-                "TD Garden": "Orange Line to North Station (12 min)",
-                "Freedom Trail": "Orange Line to State Street area (10 min)",
-                "Charles River Esplanade": "Walk north to Esplanade along the river (10 min)"
+                "North Station": "Board Orange Line northbound at Back Bay station → exit North Station (3 stops, 10 min). TD Garden entrance is on Causeway St above the station.",
+                "South Station": "Board Orange Line southbound at Back Bay station → exit South Station (2 stops, 8 min). Exit to Summer St.",
+                "Logan Airport": "Board Orange Line southbound at Back Bay → exit Downtown Crossing → board Blue Line eastbound at Government Center → exit Airport station → shuttle to terminal (28 min total).",
+                "Harvard Square": "Board Orange Line southbound at Back Bay → exit Downtown Crossing → board Red Line outbound (Alewife) → ride to Harvard (7 stops, 25 min total).",
+                "MIT Campus": "Board Orange Line southbound at Back Bay → exit Downtown Crossing → board Red Line outbound → exit Kendall/MIT (5 stops, 20 min total) → walk west on Main St.",
+                "Boston Common": "Walk north on Dartmouth St → turn left on Boylston St → enter the Common from the Boylston St entrance (10 min). Park St is 5 min further.",
+                "Public Garden": "Walk north on Dartmouth St or Arlington St → enter the Public Garden from the Arlington St gate on Boylston St (8 min).",
+                "Fenway Park": "Board Green Line D outbound at Copley station → exit Kenmore (2 stops, 5 min) → walk 5 min along Brookline Ave to Gate A. Or walk the full route via Boylston St (15 min).",
+                "Museum of Fine Arts": "Board Green Line E outbound at Copley station → exit Museum of Fine Arts stop (3 stops, 8 min) → cross Huntington Ave to the main entrance.",
+                "Boston Children's Museum": "Board Orange Line southbound at Back Bay → exit South Station (2 stops, 8 min) → board Silver Line SL2 → exit Courthouse → walk to Museum Wharf (16 min total).",
+                "New England Aquarium": "Board Orange Line southbound at Back Bay → exit Downtown Crossing → walk east on State St to Central Wharf (18 min total).",
+                "Newbury Street": "You're already in Back Bay — walk north on any cross street (Dartmouth, Exeter, Fairfield) to reach Newbury St (3–5 min).",
+                "Boston Public Library": "Walk east along Boylston St to Copley Square — the main library entrance faces the plaza (5 min). The McKim building is the historic wing.",
+                "TD Garden": "Board Orange Line northbound at Back Bay → exit North Station (3 stops, 10 min). Follow Causeway St signs to TD Garden.",
+                "Freedom Trail": "Board Orange Line at Back Bay → exit State St (4 stops, 12 min) → the Freedom Trail red brick path is immediately outside the station on Washington St.",
+                "Charles River Esplanade": "Walk north on Dartmouth St or any cross street → cross Storrow Dr via the Dartmouth St footbridge to reach the Esplanade (10 min)."
             },
             "Fenway": {
-                "North Station": "Green Line B to Downtown Crossing → Orange/Green to North Station (25 min)",
-                "South Station": "Green Line B to Downtown Crossing → Red Line South (20 min)",
-                "Logan Airport": "Green Line to downtown → Blue Line to Airport (35 min)",
-                "Harvard Square": "Green Line to downtown → Red Line to Harvard (30 min)",
-                "MIT Campus": "Green Line to downtown → Red Line to Kendall (25 min)",
-                "Boston Common": "Green Line B to Park Street (10 min)",
-                "Public Garden": "Green Line to Park Street & walk (12 min)",
-                "Fenway Park": "Walk to Fenway Park! You're right there (5-10 min)",
-                "Museum of Fine Arts": "Walk east towards museum area (10-15 min)",
-                "Boston Children's Museum": "Green Line to downtown → South Station → walk (25 min)",
-                "New England Aquarium": "Green Line to downtown → walk to waterfront (20 min)",
-                "Newbury Street": "Green Line D to Copley (5 min)",
-                "Boston Public Library": "Green Line D to Copley - Library is right there (8 min)",
-                "TD Garden": "Green Line B to North Station (20 min)",
-                "Freedom Trail": "Green Line to downtown, walk to Boston Common (15 min)",
-                "Charles River Esplanade": "Walk along Riverway path to Esplanade (15 min) or Green Line to Charles/MGH"
+                "North Station": "Board Green Line B/C/D inbound at Kenmore → exit North Station (6 stops, 18 min). Causeway St exit for TD Garden.",
+                "South Station": "Board Green Line B/C/D inbound at Kenmore → exit Park St → transfer to Red Line southbound → exit South Station (2 stops, 22 min total).",
+                "Logan Airport": "Board Green Line B inbound at Kenmore → exit Government Center → transfer to Blue Line eastbound → exit Airport station → shuttle to terminal (38 min total).",
+                "Harvard Square": "Board Green Line B/C/D inbound at Kenmore → exit Park St → transfer to Red Line outbound (Alewife) → ride to Harvard (7 stops, 30 min total).",
+                "MIT Campus": "Board Green Line B/C/D inbound at Kenmore → exit Park St → transfer to Red Line outbound → exit Kendall/MIT (5 stops, 25 min total) → walk west on Main St.",
+                "Boston Common": "Board Green Line B/C/D inbound at Kenmore → exit Park St station → walk 2 min to the Common's Boylston St or Tremont St entrance (12 min total).",
+                "Public Garden": "Board Green Line B/C/D inbound at Kenmore → exit Arlington station → the Public Garden entrance is directly across Arlington St (14 min total).",
+                "Fenway Park": "Walk east on Brookline Ave from Kenmore Square — Gate A and the main entrance are a 5-min walk. Yawkey Way is along the first-base side.",
+                "Museum of Fine Arts": "Walk east along Huntington Ave from Kenmore — Museum of Fine Arts entrance is on the left side after Louis Prang St (12 min walk). Or board Green Line E inbound 1 stop to MFA.",
+                "Boston Children's Museum": "Board Green Line B inbound at Kenmore → exit South Station → board Silver Line SL2 → exit Courthouse → walk to Museum Wharf (28 min total).",
+                "New England Aquarium": "Board Green Line B/C/D inbound at Kenmore → exit Government Center → walk east on State St to Central Wharf (24 min total).",
+                "Newbury Street": "Board Green Line D inbound at Kenmore → exit Hynes Convention Center station (1 stop, 4 min) → walk east 2 blocks on Newbury St. Or exit Copley station (2 stops, 6 min).",
+                "Boston Public Library": "Board Green Line D inbound at Kenmore → exit Copley station (2 stops, 6 min) → the library entrance faces Copley Square, directly across Dartmouth St.",
+                "TD Garden": "Board Green Line B/C/D inbound at Kenmore → exit North Station (6 stops, 18 min). TD Garden is connected to the station on Causeway St.",
+                "Freedom Trail": "Board Green Line B/C/D inbound at Kenmore → exit Park St station (5 stops, 14 min) → pick up the red brick Freedom Trail at the Visitor Center on Tremont St.",
+                "Charles River Esplanade": "Walk north on Brookline Ave to the Back Bay Fens → follow the Muddy River path north to the Esplanade along the Charles River (15 min walk)."
             },
             "South End": {
-                "North Station": "Orange Line to Downtown Crossing → Green/Orange to North Station (15 min)",
-                "South Station": "Walk or Orange Line from nearby stations (10-15 min)",
-                "Logan Airport": "Orange Line to Downtown Crossing → Blue Line to Airport (25 min)",
-                "Harvard Square": "Orange Line to Downtown Crossing → Red Line to Harvard (20 min)",
-                "MIT Campus": "Orange Line to Downtown Crossing → Red Line to Kendall (15 min)",
-                "Boston Common": "Walk north or Orange Line to Downtown Crossing (10 min)",
-                "Public Garden": "Walk or Orange Line to Downtown Crossing (15 min)",
-                "Fenway Park": "Orange Line to Back Bay → Green Line to Kenmore (15 min)",
-                "Museum of Fine Arts": "Orange Line to Back Bay (10 min)",
-                "Boston Children's Museum": "Walk or Silver Line SL4 from nearby (20 min)",
-                "New England Aquarium": "Walk to waterfront or Orange Line (15 min)",
-                "Newbury Street": "Orange Line to Back Bay (10 min)",
-                "Boston Public Library": "Orange Line to Back Bay → Walk to Copley (12 min)",
-                "TD Garden": "Orange Line to North Station (15 min)",
-                "Freedom Trail": "Walk north to Boston Common (15 min)",
-                "Charles River Esplanade": "Orange Line to Charles/MGH → walk to Esplanade (15 min)"
+                "North Station": "Board Orange Line northbound at Tufts Medical Center or Back Bay → exit North Station (3–4 stops, 12 min). TD Garden entrance is on Causeway St.",
+                "South Station": "Board Orange Line northbound at Tufts Medical Center → exit Downtown Crossing (1 stop, 5 min) → walk south on Washington St to South Station (8 min). Or walk 15 min directly.",
+                "Logan Airport": "Board Orange Line northbound at Tufts Medical Center → exit Downtown Crossing → board Blue Line eastbound at Government Center → exit Airport → shuttle to terminal (28 min total).",
+                "Harvard Square": "Board Orange Line northbound at Tufts Medical Center → exit Downtown Crossing → board Red Line outbound (Alewife) → ride to Harvard (7 stops, 26 min total).",
+                "MIT Campus": "Board Orange Line northbound at Tufts Medical Center → exit Downtown Crossing → board Red Line outbound → exit Kendall/MIT (5 stops, 22 min total) → walk west on Main St.",
+                "Boston Common": "Walk north on Tremont St or Washington St from the South End — enter Boston Common from the Boylston St or Tremont St entrance (12 min).",
+                "Public Garden": "Walk north on Tremont St → through Boston Common → exit at the Charles St or Arlington St gate to the Public Garden (16 min).",
+                "Fenway Park": "Board Orange Line northbound at Tufts Medical Center → exit Back Bay station (2 stops, 7 min) → transfer to Green Line D outbound → exit Kenmore → walk 5 min on Brookline Ave (18 min total).",
+                "Museum of Fine Arts": "Board Orange Line northbound → exit Back Bay station → board Green Line E outbound → exit Museum of Fine Arts stop, cross Huntington Ave (18 min total).",
+                "Boston Children's Museum": "Walk east on East Berkeley St to the Seaport area — Boston Children's Museum is on Museum Wharf on Congress St (18 min walk). Or board Silver Line SL4 on Washington St.",
+                "New England Aquarium": "Board Orange Line northbound at Tufts Medical Center → exit Downtown Crossing → walk east on State St to Central Wharf (18 min total).",
+                "Newbury Street": "Board Orange Line northbound → exit Back Bay station (2 stops, 7 min) → walk north on Dartmouth St to Newbury St (10 min total).",
+                "Boston Public Library": "Board Orange Line northbound → exit Back Bay station (2 stops, 7 min) → walk along Boylston St to Copley Square. Main entrance faces the plaza (12 min total).",
+                "TD Garden": "Board Orange Line northbound at Tufts Medical Center → exit North Station (4 stops, 14 min). TD Garden is connected to the station.",
+                "Freedom Trail": "Walk north on Tremont St to Boston Common (12 min) → pick up the red brick Freedom Trail at the Visitor Center. Trail starts at the northwest corner of the Common.",
+                "Charles River Esplanade": "Board Orange Line northbound → exit Charles/MGH (2 stops, 8 min) → cross the Storrow Dr footbridge to the Esplanade (14 min total)."
             },
             "Seaport": {
-                "North Station": "Silver Line to Downtown Crossing → Orange Line North (15 min)",
-                "South Station": "Walk south (5-10 min) or Silver Line SL4 (5 min)",
-                "Logan Airport": "Silver Line SL4 → Blue Line to Airport (20 min)",
-                "Harvard Square": "Silver Line to Downtown Crossing → Red Line to Harvard (25 min)",
-                "MIT Campus": "Silver Line to Downtown Crossing → Red Line to Kendall (20 min)",
-                "Boston Common": "Walk or Silver Line to Downtown Crossing (10 min)",
-                "Public Garden": "Walk or Silver Line to downtown (15 min)",
-                "Fenway Park": "Silver Line to Back Bay → Green Line to Kenmore (20 min)",
-                "Museum of Fine Arts": "Silver Line to Back Bay (15 min)",
-                "Boston Children's Museum": "Walk - Museum is in this area! (5 min)",
-                "New England Aquarium": "Walk along the Harborwalk to Aquarium (10 min)",
-                "Newbury Street": "Silver Line to Back Bay (12 min)",
-                "Boston Public Library": "Silver Line to Back Bay → Walk to Copley (15 min)",
-                "TD Garden": "Silver Line to North Station (12 min)",
-                "Freedom Trail": "Walk north along Harborwalk to start (15 min)",
-                "Charles River Esplanade": "Silver Line to downtown → Red Line to Charles/MGH → walk (20 min)"
+                "North Station": "Board Silver Line SL2 inbound at Courthouse → exit South Station → board Red Line northbound → exit Charles/MGH → board Green Line to North Station (24 min total). Or take a Lyft for a direct 12-min ride.",
+                "South Station": "Walk north on Seaport Blvd to South Station on Atlantic Ave — main entrance on Summer St (10 min walk). Or board Silver Line SL2 inbound at Courthouse → exit South Station (5 min).",
+                "Logan Airport": "Board Silver Line SL1 at Silver Line Way (free, tunneled bus) → ride directly to Logan Airport terminals E, A, B, C (15 min, no transfer needed).",
+                "Harvard Square": "Board Silver Line SL2 inbound at Courthouse → exit South Station → board Red Line outbound (Alewife) → ride to Harvard (7 stops, 28 min total).",
+                "MIT Campus": "Board Silver Line SL2 inbound at Courthouse → exit South Station → board Red Line outbound → exit Kendall/MIT (5 stops, 22 min total) → walk west on Main St 5 min.",
+                "Boston Common": "Board Silver Line SL2 inbound at Courthouse → exit South Station → walk north on Washington St or Tremont St to the Common (16 min total).",
+                "Public Garden": "Walk north on Seaport Blvd → cross Fort Point Channel → continue north to the Public Garden via downtown (20 min). Or Silver Line to South Station + 12-min walk.",
+                "Fenway Park": "Board Silver Line SL2 inbound → exit Back Bay station → cross to Green Line D outbound platform → exit Kenmore → walk 5 min on Brookline Ave (22 min total).",
+                "Museum of Fine Arts": "Board Silver Line SL2 inbound → exit Back Bay → board Green Line E outbound → exit Museum of Fine Arts stop, cross Huntington Ave (22 min total).",
+                "Boston Children's Museum": "Walk west along Congress St — Boston Children's Museum is at 308 Congress St on Museum Wharf (5 min walk).",
+                "New England Aquarium": "Walk north along the Harborwalk on Northern Ave and Atlantic Ave → New England Aquarium is at Central Wharf (12 min walk).",
+                "Newbury Street": "Board Silver Line SL2 inbound → exit Back Bay station → walk north on Dartmouth St to Newbury St (16 min total).",
+                "Boston Public Library": "Board Silver Line SL2 inbound → exit Back Bay station → walk along Boylston St to Copley Square. Main entrance faces the plaza (18 min total).",
+                "TD Garden": "Board Silver Line SL2 inbound at Courthouse → exit South Station → board Red Line northbound → exit Charles/MGH → board Green Line inbound → exit North Station (24 min total).",
+                "Freedom Trail": "Walk north on Seaport Blvd and cross Fort Point Channel → continue to South Station area → walk north on Washington St to Boston Common (20 min). Trail starts at the Common.",
+                "Charles River Esplanade": "Board Silver Line SL2 inbound → exit South Station → board Red Line northbound → exit Charles/MGH → walk across the footbridge to the Esplanade (22 min total)."
             },
             "Cambridge": {
-                "North Station": "Red Line from Harvard to North Station (20 min)",
-                "South Station": "Red Line from Harvard to South Station (25 min)",
-                "Logan Airport": "Red Line from Harvard to Downtown Crossing → Blue Line to Airport (35 min)",
-                "Harvard Square": "Walk if nearby or Red Line to Harvard Square (depends on location)",
-                "MIT Campus": "Red Line to Kendall/MIT (5-10 min from Harvard)",
-                "Boston Common": "Red Line to Park Street (15 min)",
-                "Public Garden": "Red Line to Park Street - Garden is nearby (15 min)",
-                "Fenway Park": "Red Line to Downtown Crossing → Orange to Back Bay → Green to Kenmore (30 min)",
-                "Museum of Fine Arts": "Red Line to Downtown Crossing → Orange to Back Bay (30 min)",
-                "Boston Children's Museum": "Red Line to South Station → walk (20 min)",
-                "New England Aquarium": "Red Line to Downtown Crossing → walk to waterfront (20 min)",
-                "Newbury Street": "Red Line to Back Bay (20 min)",
-                "Boston Public Library": "Red Line to Back Bay (20 min)",
-                "TD Garden": "Red Line to North Station (20 min)",
-                "Charles River Esplanade": "Walk along Charles River from Cambridge (5-15 min)"
+                "North Station": "Board Red Line inbound at Harvard → exit Charles/MGH (5 stops, 14 min) → board Green Line inbound → exit North Station (1 stop, 4 min). 18 min total.",
+                "South Station": "Board Red Line inbound at Harvard → exit South Station (7 stops, 22 min). Exit to Summer St for the main terminal.",
+                "Logan Airport": "Board Red Line inbound at Harvard → exit Downtown Crossing (6 stops, 20 min) → board Blue Line eastbound at Government Center → exit Airport station → shuttle to terminal (35 min total).",
+                "Harvard Square": "You're already in Cambridge — Harvard Square is the Red Line hub. Walk along Massachusetts Ave toward the Yard if coming from MIT area (10 min walk or 1 stop).",
+                "MIT Campus": "Board Red Line inbound at Harvard → exit Kendall/MIT (1 stop, 6 min) → walk west along Main St to the campus entrance. The Stata Center is a 3-min walk from the station.",
+                "Boston Common": "Board Red Line inbound at Harvard → exit Park St (5 stops, 16 min) → walk 2 min to the Common's Tremont St entrance.",
+                "Public Garden": "Board Red Line inbound at Harvard → exit Arlington station (6 stops, 18 min) → the Public Garden entrance is directly across Arlington St.",
+                "Fenway Park": "Board Red Line inbound at Harvard → exit Park St → board Green Line B/C/D outbound → exit Kenmore → walk 5 min on Brookline Ave (28 min total).",
+                "Museum of Fine Arts": "Board Red Line inbound at Harvard → exit Park St → board Green Line E outbound → exit Museum of Fine Arts stop, cross Huntington Ave (26 min total).",
+                "Boston Children's Museum": "Board Red Line inbound at Harvard → exit South Station (7 stops, 22 min) → board Silver Line SL2 → exit Courthouse → walk to Museum Wharf on Congress St (28 min total).",
+                "New England Aquarium": "Board Red Line inbound at Harvard → exit Downtown Crossing (6 stops, 20 min) → walk east on State St to Central Wharf (26 min total).",
+                "Newbury Street": "Board Red Line inbound at Harvard → exit Back Bay station (7 stops, 22 min) → walk north on Dartmouth St to Newbury St (26 min total).",
+                "Boston Public Library": "Board Red Line inbound at Harvard → exit Back Bay station (7 stops, 22 min) → walk 4 min along Boylston St to Copley Square (26 min total).",
+                "TD Garden": "Board Red Line inbound at Harvard → exit Charles/MGH → board Green Line inbound → exit North Station (18 min total). Causeway St exit connects directly to the arena.",
+                "Charles River Esplanade": "Walk south from Harvard Square along the Charles River path — the Esplanade is on the Boston side of the river, accessible via the Harvard or Longfellow Bridge (15 min walk)."
             },
             "Charlestown": {
-                "North Station": "Walk or Orange Line from nearby stations (10-15 min)",
-                "South Station": "Walk to Orange Line → South Station (15 min)",
-                "Logan Airport": "Orange Line to Downtown Crossing → Blue Line to Airport (20 min)",
-                "Harvard Square": "Orange Line to Downtown Crossing → Red Line to Harvard (25 min)",
-                "MIT Campus": "Orange Line to Downtown Crossing → Red Line to Kendall (20 min)",
-                "Boston Common": "Walk or Orange Line to Downtown Crossing (10 min)",
-                "Public Garden": "Walk or Orange Line downtown (15 min)",
-                "Fenway Park": "Orange Line to Back Bay → Green Line to Kenmore (25 min)",
-                "Museum of Fine Arts": "Orange Line to Back Bay (20 min)",
-                "Boston Children's Museum": "Walk south along Harborwalk (15 min)",
-                "New England Aquarium": "Walk south along waterfront (10 min)",
-                "Newbury Street": "Orange Line to Back Bay (15 min)",
-                "Boston Public Library": "Orange Line to Back Bay → Walk (20 min)",
-                "TD Garden": "Walk to North Station area (10 min)",
-                "Freedom Trail": "Start here! Old North Church is in Charlestown",
-                "Charles River Esplanade": "Walk south along waterfront to Esplanade (15 min)"
+                "North Station": "Walk south along Causeway St or Sullivan Square area — North Station is at the south end of Charlestown near the Garden (12 min walk). Or board Orange Line inbound at Community College → exit North Station (1 stop, 4 min).",
+                "South Station": "Board Orange Line inbound at Community College → exit Downtown Crossing (2 stops, 8 min) → board Red Line southbound → exit South Station (1 stop, 12 min total).",
+                "Logan Airport": "Board Orange Line inbound at Community College → exit Downtown Crossing → board Blue Line eastbound at Government Center → exit Airport → shuttle to terminal (24 min total).",
+                "Harvard Square": "Board Orange Line inbound at Community College → exit Downtown Crossing → board Red Line outbound (Alewife) → exit Harvard (7 stops, 28 min total).",
+                "MIT Campus": "Board Orange Line inbound at Community College → exit Downtown Crossing → board Red Line outbound → exit Kendall/MIT (5 stops, 24 min total) → walk west on Main St.",
+                "Boston Common": "Board Orange Line inbound at Community College → exit Downtown Crossing (2 stops, 8 min) → walk west on Winter St to Boston Common (14 min total).",
+                "Public Garden": "Board Orange Line inbound at Community College → exit Downtown Crossing → walk through the Common or along Boylston St to the Public Garden (16 min total).",
+                "Fenway Park": "Board Orange Line inbound at Community College → exit Back Bay (3 stops, 12 min) → board Green Line D outbound → exit Kenmore → walk 5 min on Brookline Ave (22 min total).",
+                "Museum of Fine Arts": "Board Orange Line inbound at Community College → exit Back Bay → board Green Line E outbound → exit Museum of Fine Arts stop (22 min total).",
+                "Boston Children's Museum": "Walk south along the Harborwalk to the Fort Point Channel area — Children's Museum is at Museum Wharf on Congress St (16 min). Or Orange Line inbound to South Station.",
+                "New England Aquarium": "Walk south along the waterfront on Commercial St to Atlantic Ave — New England Aquarium is at Central Wharf (12 min walk).",
+                "Newbury Street": "Board Orange Line inbound at Community College → exit Back Bay station (3 stops, 12 min) → walk north on Dartmouth St to Newbury St (16 min total).",
+                "Boston Public Library": "Board Orange Line inbound at Community College → exit Back Bay station (3 stops, 12 min) → walk along Boylston St to Copley Square (16 min total).",
+                "TD Garden": "Walk south along Causeway St or Warren St — North Station entrance is a 10-min walk from the Charlestown Navy Yard area. Connects directly to TD Garden.",
+                "Freedom Trail": "The Freedom Trail runs through Charlestown — start at Bunker Hill Monument (top of the hill) and follow the red brick trail south toward downtown and the North End.",
+                "Charles River Esplanade": "Walk south along the waterfront or through downtown to the Esplanade near Charles/MGH station (18 min). The Museum of Science pedestrian bridge is a scenic alternative."
             },
             "Chinatown": {
-                "North Station": "Orange Line from Chinatown station north → North Station (10 min)",
-                "South Station": "Orange Line south one stop to Downtown Crossing → walk, or walk directly (8 min)",
-                "Logan Airport": "Orange Line to Downtown Crossing → Blue Line to Airport (20 min)",
-                "Harvard Square": "Orange Line to Downtown Crossing → Red Line to Harvard (20 min)",
-                "MIT Campus": "Orange Line to Downtown Crossing → Red Line to Kendall/MIT (15 min)",
-                "Boston Common": "Walk north to Boston Common (10 min)",
-                "Public Garden": "Walk north through Boston Common (12 min)",
-                "Fenway Park": "Orange Line to Back Bay → Green Line to Kenmore (20 min)",
-                "Museum of Fine Arts": "Orange Line to Back Bay → walk or bus (15 min)",
-                "Boston Children's Museum": "Walk or Silver Line SL4 to Children's Museum (15 min)",
-                "New England Aquarium": "Walk east to waterfront (15 min) or Blue Line from Downtown Crossing",
-                "Newbury Street": "Orange Line to Back Bay (10 min)",
-                "Boston Public Library": "Orange Line to Back Bay → Walk to Copley (12 min)",
-                "TD Garden": "Orange Line north to North Station (10 min)",
-                "Freedom Trail": "Walk north to Boston Common to start the trail (10 min)",
-                "Charles River Esplanade": "Orange Line to Charles/MGH → walk to Esplanade (20 min)"
+                "North Station": "Board Orange Line northbound at Chinatown station → exit North Station (3 stops, 10 min). TD Garden is connected to the station on Causeway St.",
+                "South Station": "Walk south on Washington St from Chinatown to South Station on Atlantic Ave — main entrance is on Summer St (10 min walk). Or board Orange Line 1 stop to Downtown Crossing, then walk.",
+                "Logan Airport": "Board Orange Line at Chinatown → exit Downtown Crossing → board Blue Line eastbound at Government Center → exit Airport station → free shuttle to terminal (22 min total).",
+                "Harvard Square": "Board Orange Line at Chinatown → exit Downtown Crossing → board Red Line outbound (Alewife) → ride to Harvard (7 stops, 22 min total).",
+                "MIT Campus": "Board Orange Line at Chinatown → exit Downtown Crossing → board Red Line outbound → exit Kendall/MIT (5 stops, 18 min total) → walk west on Main St 5 min.",
+                "Boston Common": "Walk north on Washington St or Tremont St from Chinatown → enter Boston Common at the Boylston St or Tremont St entrance (10 min walk).",
+                "Public Garden": "Walk north through Boston Common → exit at the Charles St or Arlington St gate into the Public Garden (14 min walk total).",
+                "Fenway Park": "Board Orange Line at Chinatown → exit Back Bay (2 stops, 7 min) → board Green Line D outbound → exit Kenmore → walk 5 min on Brookline Ave (18 min total).",
+                "Museum of Fine Arts": "Board Orange Line at Chinatown → exit Back Bay (2 stops, 7 min) → board Green Line E outbound → exit Museum of Fine Arts stop, cross Huntington Ave (16 min total).",
+                "Boston Children's Museum": "Walk east on Kneeland St to the waterfront → cross Fort Point Channel to Museum Wharf on Congress St (15 min). Or board Silver Line SL4 at nearby bus stop.",
+                "New England Aquarium": "Walk east on Kneeland St → north on Atlantic Ave to Central Wharf. New England Aquarium entrance faces the harbor (14 min walk).",
+                "Newbury Street": "Board Orange Line at Chinatown → exit Back Bay station (2 stops, 7 min) → walk north on Dartmouth St to Newbury St (11 min total).",
+                "Boston Public Library": "Board Orange Line at Chinatown → exit Back Bay station (2 stops, 7 min) → walk along Boylston St to Copley Square. Main entrance faces the plaza (12 min total).",
+                "TD Garden": "Board Orange Line northbound at Chinatown → exit North Station (3 stops, 10 min). Follow Causeway St signs to the arena.",
+                "Freedom Trail": "Walk north on Tremont St to Boston Common (10 min) → pick up the red brick Freedom Trail at the Visitor Center on Tremont St. The trail runs 2.4 miles to Bunker Hill.",
+                "Charles River Esplanade": "Board Orange Line at Chinatown → exit Charles/MGH (3 stops, 10 min) → cross the Storrow Dr footbridge to the Esplanade (15 min total)."
             },
             "Allston": {
-                "North Station": "Green Line B to Government Center → Green Line to North Station (30 min)",
-                "South Station": "Green Line B to Downtown Crossing → Red Line south (25 min)",
-                "Logan Airport": "Green Line B to downtown → Blue Line to Airport (40 min)",
-                "Harvard Square": "Bus 66 directly to Harvard Square (15 min)",
-                "MIT Campus": "Green Line B to downtown → Red Line to Kendall/MIT (30 min)",
-                "Boston Common": "Green Line B to Park Street (20 min)",
-                "Public Garden": "Green Line B to Arlington or Copley (20 min)",
-                "Fenway Park": "Green Line B to Kenmore (10 min) or walk",
-                "Museum of Fine Arts": "Green Line B to Longwood or walk east (15 min)",
-                "Boston Children's Museum": "Green Line B to downtown → South Station → walk (30 min)",
-                "New England Aquarium": "Green Line B to downtown → walk to waterfront (25 min)",
-                "Newbury Street": "Green Line B to Hynes Convention Center or Copley (15 min)",
-                "Boston Public Library": "Green Line B to Copley (15 min)",
-                "TD Garden": "Green Line B to Government Center → North Station (25 min)",
-                "Freedom Trail": "Green Line B to downtown → Park Street (20 min)",
-                "Charles River Esplanade": "Walk south to the Charles River Esplanade (10 min)"
+                "North Station": "Board Green Line B inbound at Harvard Ave → exit Government Center (8 stops, 22 min) → board Green Line inbound → exit North Station (1 stop, 26 min total).",
+                "South Station": "Board Green Line B inbound at Harvard Ave → exit Park St → board Red Line southbound → exit South Station (1 stop, 24 min total).",
+                "Logan Airport": "Board Green Line B inbound at Harvard Ave → exit Government Center → board Blue Line eastbound → exit Airport station → shuttle to terminal (40 min total).",
+                "Harvard Square": "Board Bus 66 westbound on Harvard Ave → ride directly to Harvard Square (6 stops, 15 min). Bus runs frequently during the day.",
+                "MIT Campus": "Board Green Line B inbound at Harvard Ave → exit Park St → board Red Line outbound → exit Kendall/MIT (2 stops, 28 min total) → walk west on Main St.",
+                "Boston Common": "Board Green Line B inbound at Harvard Ave → exit Park St station (7 stops, 18 min) → walk 2 min to the Common's Tremont St entrance.",
+                "Public Garden": "Board Green Line B inbound at Harvard Ave → exit Arlington station (8 stops, 20 min) → the Public Garden entrance is directly across Arlington St.",
+                "Fenway Park": "Board Green Line B inbound at Harvard Ave → exit Kenmore station (3 stops, 10 min) → walk 5 min east along Brookline Ave to Gate A.",
+                "Museum of Fine Arts": "Board Green Line B inbound at Harvard Ave → exit Kenmore → board Green Line E outbound 1 stop to Museum of Fine Arts. Or walk east 12 min on Huntington Ave (18 min total).",
+                "Boston Children's Museum": "Board Green Line B inbound at Harvard Ave → exit South Station → board Silver Line SL2 → exit Courthouse → walk to Museum Wharf (30 min total).",
+                "New England Aquarium": "Board Green Line B inbound at Harvard Ave → exit Government Center → walk east on State St to Central Wharf (28 min total).",
+                "Newbury Street": "Board Green Line B inbound at Harvard Ave → exit Hynes Convention Center (4 stops, 12 min) → walk 1 block south to Newbury St. Or exit Copley (5 stops, 14 min).",
+                "Boston Public Library": "Board Green Line B inbound at Harvard Ave → exit Copley station (5 stops, 14 min) → library entrance faces Copley Square directly across Dartmouth St.",
+                "TD Garden": "Board Green Line B inbound at Harvard Ave → exit North Station (9 stops, 26 min). TD Garden is connected to the station on Causeway St.",
+                "Freedom Trail": "Board Green Line B inbound at Harvard Ave → exit Park St station (7 stops, 18 min) → pick up the red brick Freedom Trail at the Visitor Center on Tremont St.",
+                "Charles River Esplanade": "Walk south on any street from Allston toward the Charles River — enter the Esplanade at the BU Bridge footpath or the Weeks Footbridge near Harvard (10–15 min)."
             },
             "Brighton": {
-                "North Station": "Green Line B to Government Center → Green Line to North Station (35 min)",
-                "South Station": "Green Line B to Downtown Crossing → Red Line south (30 min)",
-                "Logan Airport": "Green Line B to downtown → Blue Line to Airport (45 min)",
-                "Harvard Square": "Bus 66 to Harvard Square (20 min)",
-                "MIT Campus": "Green Line B to downtown → Red Line to Kendall/MIT (35 min)",
-                "Boston Common": "Green Line B to Park Street (25 min)",
-                "Public Garden": "Green Line B to Arlington or Copley (25 min)",
-                "Fenway Park": "Green Line B to Kenmore (15 min)",
-                "Museum of Fine Arts": "Green Line B to Museum of Fine Arts stop (20 min)",
-                "Boston Children's Museum": "Green Line B to downtown → South Station → walk (35 min)",
-                "New England Aquarium": "Green Line B to downtown → walk to waterfront (30 min)",
-                "Newbury Street": "Green Line B to Hynes Convention Center or Copley (20 min)",
-                "Boston Public Library": "Green Line B to Copley (20 min)",
-                "TD Garden": "Green Line B to Government Center → North Station (30 min)",
-                "Freedom Trail": "Green Line B to downtown → Park Street (25 min)",
-                "Charles River Esplanade": "Walk or bus south to the Charles River (15 min)"
+                "North Station": "Board Green Line B inbound at Warren St or Chestnut Hill Ave → exit Government Center (10+ stops, 28 min) → board Green Line inbound → exit North Station (32 min total).",
+                "South Station": "Board Green Line B inbound at Warren St → exit Park St → board Red Line southbound → exit South Station (28 min total).",
+                "Logan Airport": "Board Green Line B inbound → exit Government Center → board Blue Line eastbound → exit Airport station → free shuttle to terminal (45 min total).",
+                "Harvard Square": "Board Bus 66 eastbound on Cambridge St toward Harvard Square (20 min). Bus stops frequently along Washington St and Cambridge St.",
+                "MIT Campus": "Board Green Line B inbound → exit Park St → board Red Line outbound → exit Kendall/MIT (33 min total) → walk west on Main St 5 min to campus.",
+                "Boston Common": "Board Green Line B inbound → exit Park St station (22 min) → walk 2 min to the Common's Tremont St entrance.",
+                "Public Garden": "Board Green Line B inbound → exit Arlington station (24 min) → the Public Garden entrance is directly across Arlington St.",
+                "Fenway Park": "Board Green Line B inbound → exit Kenmore station (15 min) → walk 5 min east along Brookline Ave to Fenway Park Gate A.",
+                "Museum of Fine Arts": "Board Green Line B inbound → exit Kenmore → ride 1 stop on Green Line E to Museum of Fine Arts. Or exit at Longwood Medical Area stop and walk 5 min (22 min total).",
+                "Boston Children's Museum": "Board Green Line B inbound → exit South Station → board Silver Line SL2 → exit Courthouse → walk to Museum Wharf on Congress St (38 min total).",
+                "New England Aquarium": "Board Green Line B inbound → exit Government Center → walk east on State St to Central Wharf (34 min total).",
+                "Newbury Street": "Board Green Line B inbound → exit Hynes Convention Center (18 min) → walk 1 block south to Newbury St. Or exit Copley (20 min) for the east end of the street.",
+                "Boston Public Library": "Board Green Line B inbound → exit Copley station (20 min) → library entrance faces Copley Square directly across Dartmouth St.",
+                "TD Garden": "Board Green Line B inbound → exit North Station (30 min). TD Garden is connected to the station on Causeway St.",
+                "Freedom Trail": "Board Green Line B inbound → exit Park St station (22 min) → pick up the red brick Freedom Trail at the Visitor Center on Tremont St at the edge of Boston Common.",
+                "Charles River Esplanade": "Walk south toward the Charles River — enter the Esplanade at the BU Bridge footpath on Commonwealth Ave or via the Weeks Footbridge near Harvard (15 min walk)."
             }
         };
-
-        if (city && dest) {
-            const lookupCity = routes[city] ? city : (originAliases[city] || city);
-            const lookupDest = (routes[lookupCity] && routes[lookupCity][dest]) ? dest : (destinationAliases[dest] || dest);
-            const route = routes[lookupCity]?.[lookupDest] || null;
-            
-            if (route) {
-                document.getElementById("routeBox").innerHTML = `
-                    <h1>Your Route</h1>
-                    <div class="route-details">
-                        <div class="location from">
-                            <p class="label">From:</p>
-                            <p class="name">${city}</p>
-                        </div>
-                        <div class="arrow-large">→</div>
-                        <div class="location to">
-                            <p class="label">To:</p>
-                            <p class="name">${dest}</p>
-                        </div>
-                    </div>
-                    <div class="route-instructions">
-                        <h2>Directions:</h2>
-                        <p class="instruction">${route}</p>
-                    </div>
-                    <div class="route-actions">
-                        <button id="toggle-attractions" class="route-dropdown-btn" type="button" aria-expanded="false" aria-controls="attractions-panel">
-                            See attractions nearby ▼
-                        </button>
-                    </div>
-                    <div id="nearby-attractions"></div>
-                `;
-
-                // Fetch live MBTA alerts for the lines in this route
-                fetchAlertsForRoute(route);
-                // Fetch next departures from nearest stop
-                fetchPredictions(lookupCity);
-                // Show attractions near the destination
-                renderAttractionsBox(lookupDest);
-            } else {
-                document.getElementById("routeBox").innerHTML = `
-                    <h1>Route Not Found</h1>
-                    <p>We don't have a specific route for <strong>${city} → ${dest}</strong>, but here's a general guide:</p>
-                    <p>Head to the nearest subway station and ask for directions, or check out the MBTA map at your local station.</p>
-                    <p><a href="startpage.html" class="link">Try Another Route</a></p>
-                `;
-            }
-        } else {
-            document.getElementById("routeBox").innerHTML = `
-                <h1>No Route Selected</h1>
-                <p>Please select both a starting location and a destination.</p>
-                <p><a href="startpage.html" class="link">Go Back and Plan a Route</a></p>
-            `;
-        }
 
         const MBTA_API_KEY = 'c5d3ce45e5864cc3aafffd54a7add1e3';
         const GOOGLE_PLACES_API_KEY = '';
@@ -667,17 +614,25 @@
             '741': '⚪ Silver SL1', '742': '⚪ Silver SL2', '749': '⚪ Silver SL5'
         };
 
-        async function fetchPredictions(city) {
+        async function fetchPredictions(city, routeText) {
             const stop = neighborhoodStops[city];
             if (!stop) return;
             try {
-                const url = `https://api-v3.mbta.com/predictions?filter[stop]=${stop.id}&sort=departure_time&page[limit]=8&api_key=${MBTA_API_KEY}`;
+                const lines = detectLines(routeText || '');
+                const routeFilter = lines.length > 0 ? `&filter[route]=${encodeURIComponent(lines.join(','))}` : '';
+                const url = `https://api-v3.mbta.com/predictions?filter[stop]=${stop.id}${routeFilter}&sort=departure_time&page[limit]=8&api_key=${MBTA_API_KEY}`;
                 const resp = await fetch(url);
                 const data = await resp.json();
                 const now = new Date();
+                const seen = new Set();
                 const preds = (data.data || []).filter(p => {
                     const t = p.attributes.departure_time || p.attributes.arrival_time;
-                    return t && new Date(t) >= now;
+                    if (!t || new Date(t) < now) return false;
+                    const routeId = p.relationships?.route?.data?.id || '';
+                    const key = `${routeId}|${t}`;
+                    if (seen.has(key)) return false;
+                    seen.add(key);
+                    return true;
                 }).slice(0, 5);
                 renderPredictionsBox(preds, stop.name);
             } catch(e) {
@@ -783,6 +738,56 @@
                 }).join('');
                 box.innerHTML = `<div class="live-box"><p class="live-title">⚡ Live Service Alerts</p>${items}</div>`;
             }
+        }
+
+        if (city && dest) {
+            const lookupCity = routes[city] ? city : (originAliases[city] || city);
+            const lookupDest = (routes[lookupCity] && routes[lookupCity][dest]) ? dest : (destinationAliases[dest] || dest);
+            const route = routes[lookupCity]?.[lookupDest] || null;
+
+            if (route) {
+                document.getElementById("routeBox").innerHTML = `
+                    <h1>Your Route</h1>
+                    <div class="route-details">
+                        <div class="location from">
+                            <p class="label">From:</p>
+                            <p class="name">${city}</p>
+                        </div>
+                        <div class="arrow-large">→</div>
+                        <div class="location to">
+                            <p class="label">To:</p>
+                            <p class="name">${dest}</p>
+                        </div>
+                    </div>
+                    <div class="route-instructions">
+                        <h2>Directions:</h2>
+                        <p class="instruction">${route}</p>
+                    </div>
+                    <div class="route-actions">
+                        <button id="toggle-attractions" class="route-dropdown-btn" type="button" aria-expanded="false" aria-controls="attractions-panel">
+                            See attractions nearby ▼
+                        </button>
+                    </div>
+                    <div id="nearby-attractions"></div>
+                `;
+
+                fetchAlertsForRoute(route);
+                fetchPredictions(lookupCity, route);
+                renderAttractionsBox(lookupDest);
+            } else {
+                document.getElementById("routeBox").innerHTML = `
+                    <h1>Route Not Found</h1>
+                    <p>We don't have a specific route for <strong>${city} → ${dest}</strong>, but here's a general guide:</p>
+                    <p>Head to the nearest subway station and ask for directions, or check out the MBTA map at your local station.</p>
+                    <p><a href="startpage.html" class="link">Try Another Route</a></p>
+                `;
+            }
+        } else {
+            document.getElementById("routeBox").innerHTML = `
+                <h1>No Route Selected</h1>
+                <p>Please select both a starting location and a destination.</p>
+                <p><a href="startpage.html" class="link">Go Back and Plan a Route</a></p>
+            `;
         }
     </script>
 </body>
